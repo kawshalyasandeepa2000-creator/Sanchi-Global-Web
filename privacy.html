@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#061C1E"><meta name="description" content="Privacy information for SENCHI GLOBAL LLC website visitors."><link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/emerald-theme.css">
-  <link rel="stylesheet" href="css/brand-colors.css"><title>Privacy & Disclaimer | SENCHI GLOBAL LLC</title><script src="js/site-config.js?v=20261104fix" defer></script><script src="js/site.js?v=20261104fix" defer></script></head><body data-page="privacy"><div id="site-root"></div>
+  <link rel="stylesheet" href="css/brand-colors.css?v=20261104hero-v2"><title>Privacy & Disclaimer | SENCHI GLOBAL LLC</title><script src="js/site-config.js?v=20261104photos" defer></script><script src="js/site.js?v=20261104photos" defer></script></head><body data-page="privacy"><div id="site-root"></div>
   <!-- Publishing safety: if the external JS path fails on a static host, render from the embedded backup. -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -216,9 +216,15 @@
 
   function serviceCard(s) {
     const chip = {tourist:'EXPLORE MORE',student:'STUDY ABROAD',work:'GLOBAL CAREERS'}[s.class];
+    const descriptions = {
+      tourist: 'Travel destinations and famous landmarks',
+      student: 'Students walking toward a university campus',
+      work: 'International traveler in an airport terminal'
+    };
     return `<article class="service-card service-card--${s.class} reveal">
-      <div class="service-card__visual"><span class="service-card__counter">${s.number} / 03</span>
-        <div class="card-illustration card-illustration--${s.class}" aria-hidden="true"><div class="card-illustration__halo"></div><div class="card-illustration__ring"></div><div class="card-illustration__symbol">${icon(s.icon,62)}</div><span class="card-illustration__spark a">✦</span><span class="card-illustration__spark b">✧</span></div>
+      <div class="service-card__visual">
+        <img class="service-card__photo" src="assets/${s.class}-visa.jpg" alt="${descriptions[s.class]}" loading="lazy" decoding="async">
+        <span class="service-card__counter">${s.number} / 03</span>
         <span class="service-card__chip">${chip}</span>
       </div>
       <div class="service-card__body"><h3>${s.title}</h3><p>${s.short}</p>

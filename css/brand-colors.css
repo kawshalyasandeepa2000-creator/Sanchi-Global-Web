@@ -225,59 +225,57 @@ em, .eyebrow .icon { color: #72D59A; }
   .service-card:hover .service-card__photo { transform: none; }
 }
 
-/* SENCHI GLOBAL — New Hero Background */
 
+/* ===================================================================
+   SENCHI GLOBAL — CINEMATIC HERO IMAGE (GitHub Pages verified edition)
+   Keep this block at the end of brand-colors.css. It deliberately
+   overrides the original gradient and animated globe in the hero.
+   =================================================================== */
 .hero {
-  background-image:
-    linear-gradient(
-      90deg,
-      rgba(2, 23, 21, 0.72) 0%,
-      rgba(2, 23, 21, 0.35) 42%,
-      rgba(2, 23, 21, 0.02) 80%
-    ),
-    url("../assets/hero-background.webp");
-
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-color: #062724;
+  background-image: url("../assets/hero-background.webp") !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
 }
-
-/* Remove old globe and background effects */
+/* Darken left side so the real text and clickable buttons are legible. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(90deg,
+    rgba(2, 26, 25, 0.80) 0%,
+    rgba(2, 26, 25, 0.60) 29%,
+    rgba(2, 26, 25, 0.15) 58%,
+    rgba(2, 26, 25, 0.02) 85%) !important;
+  pointer-events: none;
+}
+.hero::after,
 .hero__art,
-.hero__wash {
-  display: none !important;
-}
-
-.hero::before,
-.hero::after {
-  display: none;
-}
-
-/* Keep website content above the background */
+.hero__wash { display: none !important; }
 .hero__grid {
-  grid-template-columns: minmax(0, 760px) 1fr;
-}
-
-.hero__copy {
+  grid-template-columns: minmax(0, 790px) minmax(0, 1fr);
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
-
-/* Mobile background adjustment */
-@media (max-width: 767px) {
-  .hero {
-    background-image:
-      linear-gradient(
-        rgba(2, 23, 21, 0.84),
-        rgba(2, 23, 21, 0.60)
-      ),
-      url("../assets/hero-background.webp");
-
-    background-position: 68% center;
+.hero__copy { position: relative; z-index: 2; }
+@media (max-width: 900px) {
+  .hero { background-position: 67% center !important; }
+  .hero::before {
+    background: linear-gradient(90deg,
+      rgba(2, 26, 25, .86),
+      rgba(2, 26, 25, .66) 53%,
+      rgba(2, 26, 25, .3)) !important;
   }
-
-  .hero__grid {
-    grid-template-columns: 1fr;
-    min-height: 700px;
+  .hero__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .hero { background-position: 73% center !important; }
+  .hero::before {
+    background: linear-gradient(180deg,
+      rgba(2, 26, 25, .89),
+      rgba(2, 26, 25, .76) 64%,
+      rgba(2, 26, 25, .50)) !important;
   }
 }
