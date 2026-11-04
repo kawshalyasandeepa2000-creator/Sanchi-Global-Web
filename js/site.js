@@ -153,7 +153,7 @@
 
   function brand(footer = false) {
     return `<a class="brand ${footer ? 'brand--footer' : ''}" href="index.html" aria-label="SENCHI GLOBAL LLC — home">
-      <img class="brand__mark" src="assets/brand-mark.svg" width="49" height="49" alt="">
+      <img class="brand__mark" src="assets/logo.jpeg" width="49" height="49" alt="">
       <span class="brand__type"><strong>SENCHI <span>GLOBAL</span></strong><small>LLC · VISA GUIDANCE</small></span>
     </a>`;
   }
