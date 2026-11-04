@@ -1,0 +1,158 @@
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SENCHI GLOBAL LLC — Brand palette v3
+   PRIMARY   #4BB878  fresh green
+   SECONDARY #5AB7B1  coastal teal
+   All visible pages use these two accents, with layered dark emerald
+   backgrounds so consecutive sections are distinct without clashing.
+   Edit this file to change brand colors across the entire website.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root {
+  color-scheme: dark;
+  --primary: #4BB878;
+  --secondary: #5AB7B1;
+  --primary-bright: #8EDBB0;
+  --secondary-bright: #92E0D7;
+  --ink: #EFFBF4;
+  --ink-deep: #FFFFFF;
+  --muted: #B1D2CB;
+  --muted-dark: #A2C5BC;
+  --blue: #5AB7B1;
+  --blue-deep: #8BDCD1;
+  --blue-light: #123F3A;
+  --gold: #4BB878;
+  --gold-light: #BAF0CE;
+  --line: rgba(119,218,187,.22);
+  --background: #061C1E;
+  --glass: rgba(113,201,173,.09);
+  --shadow: 0 25px 70px rgba(0,17,16,.35);
+}
+body { background: #061C1E; color: #F5FFF9; }
+::selection { background: #4BB878; color: #061C1E; }
+:focus-visible { outline-color: #5AB7B1; }
+em, .eyebrow .icon { color: #72D59A; }
+.glass { background:rgba(127,214,178,.085); border-color:rgba(165,239,209,.20); }
+/* Buttons, navigation and small identity surfaces */
+.btn--primary, .btn--nav {
+  background:linear-gradient(112deg,#4BB878 0%,#5AB7B1 100%);
+  color:#06251F;
+  border:1px solid rgba(194,255,220,.25);
+  box-shadow:0 13px 30px rgba(43,177,136,.21),inset 0 1px rgba(255,255,255,.32);
+}
+.btn--primary:hover,.btn--nav:hover {
+  background:linear-gradient(112deg,#69D596,#79CEC8 100%);
+  color:#06251F;
+  box-shadow:0 16px 34px rgba(43,177,136,.31);
+}
+.btn--ghost { border-color:rgba(135,218,196,.29); background:rgba(104,199,176,.095); }
+.btn--ghost:hover { border-color:rgba(127,228,195,.52);background:rgba(104,199,176,.17); }
+.btn--secondary {background:#15483F;border-color:rgba(127,228,195,.3);color:#E9FFF4;}
+.btn--light {background:#E6FFF1;color:#08332C;}
+.reading-progress {background:linear-gradient(90deg,#4BB878,#5AB7B1);}
+.site-header.is-scrolled {background:rgba(4,28,28,.96);border-bottom-color:rgba(120,212,185,.16);}
+.brand__type strong span {color:#75D4C5;}
+.brand__type small {color:#83DDA4;}
+.desktop-nav>a:hover,.desktop-nav>a.is-current,.nav-menu__trigger:hover {color:#93E5D9;}
+.nav-menu__panel {background:rgba(9,45,42,.98);border-color:rgba(125,219,192,.24);}
+.nav-menu__panel>a:hover {background:rgba(95,194,158,.12);}
+.nav-menu__icon {background:rgba(75,184,120,.16);color:#8BDBAA;}
+.nav-menu__icon.student {background:rgba(90,183,177,.16);color:#8CDFD6;}
+.nav-menu__icon.work {background:rgba(75,184,120,.16);color:#B4EBCB;}
+.mobile-nav {background:rgba(5,30,29,.985);}
+.mobile-nav>a.mobile-nav__service {color:#A0E7D3;}
+/* 01 — midnight emerald | 02 — forest teal | 03 — lagoon */
+.hero { background:linear-gradient(117deg,#061B1C 0%,#0A3430 53%,#0C4842 100%); }
+.hero::before {background:radial-gradient(ellipse at 76% 34%,rgba(90,183,177,.26),transparent 47%),radial-gradient(ellipse at 13% 85%,rgba(75,184,120,.13),transparent 55%);}
+.hero__wash {background:radial-gradient(circle,rgba(75,184,120,.24),transparent 70%);}
+.hero h1 .word-emphasis {color:#71D3B2;}
+.hero__underline::after {border-bottom-color:#4BB878;}
+.hero__eyebrow-dot,.hero-bottom__scroll i {background:#4BB878;}
+#globe-canvas {filter:drop-shadow(0 22px 51px rgba(75,184,120,.26));}
+.orbit-aura {background:radial-gradient(circle,rgba(90,183,177,.24),rgba(46,130,106,.075) 60%,transparent 75%);}
+.floating-note {background:rgba(10,48,43,.80);border-color:rgba(150,224,198,.26);}
+.floating-note__icon {background:rgba(75,184,120,.16);color:#9AE6C0;}
+.floating-note__icon--gold {background:rgba(90,183,177,.16);color:#99DFDA;}
+.services-section {background:linear-gradient(130deg,#10392F 0%,#155047 48%,#0D3A3D 100%);}
+.services-section::before {background:radial-gradient(circle at 0 0,rgba(75,184,120,.21),transparent 39%);opacity:1;}
+.service-card {background:rgba(4,36,35,.71);border-color:rgba(154,226,195,.19);}
+.service-card:hover {border-color:rgba(75,184,120,.55);}
+.service-card--tourist .service-card__visual {background:radial-gradient(circle at 66% 35%,rgba(75,184,120,.46),transparent 50%),linear-gradient(145deg,#24705A,#145343 68%,#0A3430);}
+.service-card--student .service-card__visual {background:radial-gradient(circle at 63% 35%,rgba(90,183,177,.36),transparent 52%),linear-gradient(145deg,#216B6C,#16514F 69%,#0A3436);}
+.service-card--work .service-card__visual {background:radial-gradient(circle at 67% 35%,rgba(137,222,180,.35),transparent 50%),linear-gradient(145deg,#235A4C,#174B44 68%,#092F2B);}
+.card-illustration__symbol {background:linear-gradient(145deg,rgba(158,237,198,.32),rgba(36,129,105,.47));color:#BAFFDB;}
+.card-illustration--student .card-illustration__symbol {background:linear-gradient(145deg,rgba(142,220,211,.32),rgba(38,122,119,.49));color:#AAFFF1;}
+.card-illustration--work .card-illustration__symbol {background:linear-gradient(145deg,rgba(153,231,199,.28),rgba(28,111,89,.5));color:#C7FFE2;}
+.route-section {background:linear-gradient(134deg,#082C31 0%,#104D50 55%,#0A3437 100%);}
+.route-section::before {background:radial-gradient(circle at 95% 10%,rgba(90,183,177,.17),transparent 37%);}
+.route-shell {background:rgba(4,34,35,.68);border:1px solid rgba(149,227,206,.15);}
+.route-shell__menu {background:rgba(4,32,33,.86);border-color:rgba(141,229,192,.17);}
+.route-tab.is-active {background:rgba(75,184,120,.18);border-color:rgba(121,226,182,.35);}
+.route-docs {background:rgba(90,183,177,.11);border-color:rgba(144,226,214,.19);}
+/* 04 — sea-glass about | 05 — evergreen journeys */
+.about-section {background:linear-gradient(130deg,#0A3B39 0%,#12635B 53%,#0C4644 100%);}
+.about-visual__outer {background:linear-gradient(145deg,#4BB878,#248E84 48%,#0C4F4C);}
+.about-visual__center {background:linear-gradient(145deg,rgba(209,255,229,.31),rgba(37,145,122,.26));color:#D6FFEC;}
+.about-visual__orbit {border-color:rgba(113,218,171,.71);}
+.journey-section {background:linear-gradient(130deg,#061F25 0%,#0B3437 54%,#082A30 100%);}
+.journey-tile--tourist {background:radial-gradient(ellipse at 56% 29%,rgba(143,232,173,.81),transparent 36%),linear-gradient(180deg,#3F9D7D 0%,#25725F 50%,#0A3A34 100%);}
+.journey-tile--student {background:radial-gradient(ellipse at 62% 27%,rgba(146,227,218,.81),transparent 36%),linear-gradient(170deg,#448C87 0%,#276B6A 55%,#0C3B3F 100%);}
+.journey-tile--work {background:radial-gradient(ellipse at 55% 33%,rgba(113,218,170,.85),transparent 36%),linear-gradient(160deg,#458F72,#246D60 49%,#113C34 100%);}
+.journey-tile__sun {background:rgba(155,235,193,.43);box-shadow:0 0 75px rgba(108,219,169,.28);}
+/* 06 — shadow forest | 07 — bright jade statement */
+.process-section {background:linear-gradient(128deg,#0D322D 0%,#13493E 49%,#0D3436 100%);}
+.process-card {background:rgba(5,39,38,.64);border-color:rgba(151,230,195,.17);}
+.process-card:hover {background:rgba(20,79,66,.9);}
+.statement-section {background:linear-gradient(115deg,#176B58 0%,#248E77 53%,#287D79 100%);}
+.statement-section::before {background:radial-gradient(circle at 77% 30%,rgba(176,255,220,.2),transparent 44%),radial-gradient(circle at 6% 90%,rgba(0,26,24,.3),transparent 59%);}
+.statement-art__orb {background:radial-gradient(circle at 33% 27%,rgba(199,255,226,.48),rgba(89,205,169,.24) 48%,rgba(5,66,57,.13) 74%);}
+/* 08 — deep tide FAQ | 09 — frosted green inquiry | 10 — footer */
+.faq-section {background:linear-gradient(130deg,#092E33 0%,#0C4241 100%);}
+.faq-toggle {background:rgba(75,184,120,.15);color:#A4EDCB;}
+.faq-item.is-open .faq-toggle {background:rgba(90,183,177,.32);color:#E6FFF5;}
+.contact-section {background:linear-gradient(128deg,#093F39 0%,#155C4E 53%,#0A4641 100%);}
+.contact-section::before {background:radial-gradient(circle,rgba(90,183,177,.21),transparent 70%);}
+.contact-mini__icon {background:rgba(75,184,120,.14);color:#AEF1D0;}
+.contact-direct {color:#9AECD0;}
+.contact-form-wrap {background:rgba(245,255,249,.97);color:#123D34;border-color:rgba(225,255,236,.8);}
+.contact-form-wrap h3 {color:#123F34;}
+.contact-form-wrap label {color:#295849;}
+.contact-form-wrap input,.contact-form-wrap select,.contact-form-wrap textarea {background:#FFFFFF;color:#123D34;border-color:#C9E7D7;}
+.contact-form-wrap input:focus,.contact-form-wrap select:focus,.contact-form-wrap textarea:focus {border-color:#4BB878;box-shadow:0 0 0 3px rgba(75,184,120,.20);}
+.contact-form-wrap .btn--primary {color:#06251F;}
+.site-footer {background:#041B1C;border-color:rgba(110,221,188,.13);}
+/* Standalone visa and legal pages retain the same coordinated chapters */
+.detail-hero {background:radial-gradient(circle at 78% 42%,rgba(75,184,120,.24),transparent 41%),linear-gradient(130deg,#061F21,#10584A 68%,#0A3635);}
+.detail-hero--student {background:radial-gradient(circle at 78% 40%,rgba(90,183,177,.24),transparent 40%),linear-gradient(130deg,#071F25,#105053 68%,#0A3438);}
+.detail-hero--work {background:radial-gradient(circle at 78% 40%,rgba(75,184,120,.26),transparent 40%),linear-gradient(130deg,#061F1D,#145744 68%,#0B3A35);}
+.detail-hero__art-inner {background:radial-gradient(circle at 32% 25%,#8DE0B4,#319A7C 52%,#125347);}
+.detail-hero--student .detail-hero__art-inner {background:radial-gradient(circle at 32% 25%,#99E7DF,#379D99 52%,#155653);}
+.detail-hero--work .detail-hero__art-inner {background:radial-gradient(circle at 32% 25%,#A4E9C1,#398E75 52%,#174C40);}
+.detail-art-icon {color:#E6FFF2;}
+.detail-hero--student .detail-art-icon {color:#D6FFF9;}
+.detail-hero--work .detail-art-icon {color:#DCFFEB;}
+.detail-intro {background:linear-gradient(135deg,#0B4039,#155B4E 80%,#0B3C37);}
+.help-section {background:linear-gradient(127deg,#0B3337,#125252 55%,#0A3538);}
+.help-card {background:rgba(4,37,37,.68);border-color:rgba(147,230,209,.19);}
+.help-card__icon {background:rgba(75,184,120,.16);color:#AEEDC4;}
+.help-card:nth-child(even) .help-card__icon {background:rgba(90,183,177,.19);color:#AAF1EA;}
+.documents-section {background:linear-gradient(130deg,#0E493E,#176455 64%,#0D423C);}
+.documents-note {background:rgba(3,44,39,.46);border-left:3px solid #4BB878;}
+.documents-list {background:rgba(4,43,38,.72);}
+.document-item__icon {background:rgba(75,184,120,.17);color:#B8F2D2;}
+.timeline-section {background:linear-gradient(130deg,#0B3436,#155858 55%,#103E40);}
+.timeline-grid::before {background:linear-gradient(90deg,#4BB878,#5AB7B1,#4BB878);}
+.timeline-step__dot {background:#5AB7B1;border-color:#10443F;}
+.detail-faq {background:linear-gradient(130deg,#0B3235,#11504D);}
+.service-cta-section {background:linear-gradient(120deg,#12634D,#197766);}
+.service-cta {background:rgba(4,46,39,.55);}
+.related-section {background:#082825;}
+.related-card {background:rgba(75,184,120,.085);border-color:rgba(136,227,182,.2);}
+.related-card:hover {background:rgba(90,183,177,.16);}
+.related-card__icon {background:rgba(75,184,120,.16);color:#AEF4C6;}
+.legal-hero {background:linear-gradient(128deg,#061D20,#105448);}
+.legal-section {background:#0D3835;}
+.legal-content {background:rgba(8,42,38,.8);border-color:rgba(150,236,197,.2);}
+@media(max-width:720px){
+ .route-shell__menu {border-color:rgba(135,229,196,.19);}
+ .journey-gallery {scrollbar-color:#4BB878 transparent;}
+}
