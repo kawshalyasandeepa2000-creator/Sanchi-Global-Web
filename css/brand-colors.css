@@ -156,3 +156,33 @@ em, .eyebrow .icon { color: #72D59A; }
  .route-shell__menu {border-color:rgba(135,229,196,.19);}
  .journey-gallery {scrollbar-color:#4BB878 transparent;}
 }
+/* SENCHI GLOBAL — Premium glass card shadows */
+
+.glass-card,
+.service-card,
+.process-card,
+.feature-card,
+.visa-card {
+  border: 1px solid rgba(0, 0, 0, 0.80);
+  box-shadow:box-shadow: 0 16px 40px rgba(0,0,0,.48);
+    0 8px 20px rgba(0, 0, 0, 0.22),
+    0 18px 45px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Stronger shadows on hover */
+
+.glass-card:hover,
+.service-card:hover,
+.process-card:hover,
+.feature-card:hover,
+.visa-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.3),
+    0 25px 55px rgba(0, 0, 0, 0.22);
+}
