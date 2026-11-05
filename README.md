@@ -43,3 +43,6 @@ package.json            npm start command
 **Contact/social links:** edit `js/site-config.js`. Blank social links remain hidden until added.
 
 **Important:** the inquiry form currently composes a message; it does not submit to a server. Add a verified company email and review legal/visa information before publishing. No visa approvals are guaranteed.
+
+
+**Latest header update:** see `HEADER_TWO_LOGOS_GUIDE.md`.

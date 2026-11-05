@@ -11,15 +11,17 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/emerald-theme.css">
-  <link rel="stylesheet" href="css/brand-colors.css?v=20261104chapter-photo-v1">
+  <link rel="stylesheet" href="css/brand-colors.css?v=20261105-transparent-white-v1">
+  <link rel="stylesheet" href="css/mobile-what-we-do.css?v=20261105-mobile-swipe-v1">
   <title>SENCHI GLOBAL LLC | Visa Guidance for Your Next Chapter</title>
   <script src="js/site-config.js?v=20261104photos" defer></script>
-  <script src="js/site.js?v=20261104photos" defer></script>
+  <script src="js/site.js?v=20261105-visa-detail-photos-v1" defer></script>
+  <script src="js/mobile-what-we-do.js?v=20261105-mobile-swipe-v1" defer></script>
 </head>
 <body data-page="home">
   <div id="site-root"></div>
 
-  <!-- Publishing safety: if the external JS path fails on a static host, render from the embedded backup. -->
+  <!-- Safety fallback: initialize when a static host cannot retrieve the external JS. -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var mount = document.getElementById('site-root');
@@ -180,7 +182,10 @@
 
   function brand(footer = false) {
     return `<a class="brand ${footer ? 'brand--footer' : ''}" href="index.html" aria-label="SENCHI GLOBAL LLC — home">
-      <img class="brand__mark" src="assets/logo.jpeg" onerror="this.onerror=null;this.src='assets/brand-mark.svg'" width="49" height="49" alt="SENCHI GLOBAL LLC logo">
+      <span class="brand__logo-wrap">
+        <img class="brand__mark brand__mark--default" src="assets/logo-before-scroll.png" width="56" height="56" alt="SENCHI GLOBAL LLC logo" loading="eager" decoding="sync">
+        ${footer ? '' : '<img class="brand__mark brand__mark--scrolled" src="assets/logo-after-scroll.png" width="56" height="56" alt="" aria-hidden="true" loading="eager" decoding="sync">'}
+      </span>
       <span class="brand__type"><strong>SENCHI <span>GLOBAL</span></strong><small>LLC · VISA GUIDANCE</small></span>
     </a>`;
   }
@@ -362,7 +367,12 @@
       <section class="detail-hero detail-hero--${s.class}"><div class="container">
         <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a>${icon('chevron',14)}<a href="index.html#services">Services</a>${icon('chevron',14)}<span>${s.title}</span></nav>
         <div class="detail-hero__grid"><div class="detail-hero__copy reveal"><span class="eyebrow">${icon('sparkle',14)} ${s.label}</span><h1>${s.heroTitle}</h1><p>${s.heroText}</p><div class="detail-hero__actions"><a class="btn btn--primary" href="${ctaLink(s.class)}">Start an inquiry ${icon('arrowUp',18)}</a><a class="btn btn--ghost" href="#what-we-help-with">What we help with ${icon('arrow',18)}</a></div></div>
-          <div class="detail-hero__art reveal"><div class="detail-hero__art-inner"><div class="detail-art-orbit detail-art-orbit--one"></div><div class="detail-art-orbit detail-art-orbit--two"></div><div class="detail-art-icon">${icon(s.icon,112)}</div><span class="detail-art-spark spark-one">✦</span><span class="detail-art-spark spark-two">✧</span></div><span class="detail-hero__badge glass">${icon('check',18)} MADE FOR YOUR NEXT STEP</span></div></div>
+          <div class="detail-hero__art detail-hero__art--photo reveal">
+            <div class="detail-hero__photo-frame">
+              <img class="detail-hero__photo" src="assets/detail-${s.class}.jpg" alt="${esc({tourist:'Tourism and visa travel illustration with a passport and airplane',student:'Students preparing to study abroad with books and travel documents',work:'Professional visa consultation in an office overlooking Dubai'}[s.class])}" width="736" height="1000" loading="eager" decoding="async" fetchpriority="high">
+            </div>
+            <span class="detail-hero__badge glass">${icon('check',18)} MADE FOR YOUR NEXT STEP</span>
+          </div></div>
       </div></section>
       <section class="section detail-intro"><div class="container detail-intro__grid"><div>${sectionHeading('THE BIG PICTURE',`Your journey, <em>thoughtfully planned.</em>`)}</div><div><p>${s.intro}</p><h3>Who this service can help</h3><div class="ideal-list">${s.ideal.map(t=>`<div>${icon('circleCheck',19)}<span>${esc(t)}</span></div>`).join('')}</div></div></div></section>
       <section class="section help-section" id="what-we-help-with"><div class="container">${sectionHeading('SUPPORT ALONG THE WAY','What we can <em>help you understand.</em>','The exact pathway will depend on official rules and your circumstances. These are the core areas we can help you prepare for.')}
@@ -501,9 +511,13 @@
     });
   }
 
-  // The progress line, header effect, and reveal elements are small progressive enhancements.
+  // The two supplied company logos are built into the header; no fallback image switching.
+
+  // White header begins exactly when the first full section has moved off-screen.
+  // This is intentionally not a fixed pixel threshold: it adapts to screen sizes.
   const progress = document.getElementById('reading-progress');
   const siteHeader = document.getElementById('site-header');
+  const firstSection = document.querySelector('main > section');
   let ticking = false;
   const onScroll = () => {
     if (ticking) return;
@@ -511,11 +525,20 @@
     requestAnimationFrame(()=>{
       const max = document.documentElement.scrollHeight - window.innerHeight;
       if (progress) progress.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
-      siteHeader?.classList.toggle('is-scrolled',window.scrollY > 10);
+      const lightHeader = firstSection && siteHeader
+        ? firstSection.getBoundingClientRect().bottom <= 0
+        : window.scrollY > 80;
+      siteHeader?.classList.toggle('is-scrolled', Boolean(lightHeader));
       ticking = false;
     });
   };
-  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  // Initialize the color scheme right away, including on refresh or anchor loads.
+  if (firstSection && siteHeader) {
+    siteHeader.classList.toggle('is-scrolled',
+      firstSection.getBoundingClientRect().bottom <= 0);
+  }
   onScroll();
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const observer = new IntersectionObserver(entries=>entries.forEach(entry=>{
@@ -715,6 +738,7 @@
     draw(performance.now());
   }
 })();
+
 
     });
   </script>

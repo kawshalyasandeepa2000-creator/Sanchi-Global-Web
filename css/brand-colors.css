@@ -362,3 +362,250 @@ em, .eyebrow .icon { color: #72D59A; }
   .journey-tile__scene { transition: none; }
   .journey-tile:hover .journey-tile__scene { transform: none; }
 }
+
+
+/* ================================================================
+   SENCHI GLOBAL | TWO-TONE STICKY HEADER · November 2026
+   Above the first section: dark transparent header + existing logo.
+   After first section: white header + dark text + newL.jpeg logo.
+   ================================================================ */
+.site-header {
+  transition: background-color .32s ease, box-shadow .32s ease,
+              border-color .32s ease, padding-top .32s ease;
+}
+/* The two images occupy exactly the same area without a layout shift. */
+.site-header .brand__logo-wrap,
+.site-footer .brand__logo-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 49px;
+  width: 49px;
+  height: 49px;
+}
+.brand__logo-wrap .brand__mark {
+  grid-area: 1 / 1;
+  display: block;
+  width: 49px;
+  height: 49px;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: opacity .28s ease, visibility .28s ease;
+}
+.site-header .brand__mark--scrolled {
+  opacity: 0;
+  visibility: hidden;
+}
+/* White, readable navigation appears ONLY after crossing the first section. */
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, .97) !important;
+  border-bottom: 1px solid rgba(18, 53, 47, .12) !important;
+  box-shadow: 0 8px 28px rgba(0, 29, 25, .12) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.site-header.is-scrolled .brand__mark--default {
+  opacity: 0;
+  visibility: hidden;
+}
+.site-header.is-scrolled .brand__mark--scrolled {
+  opacity: 1;
+  visibility: visible;
+}
+.site-header.is-scrolled .brand__type strong,
+.site-header.is-scrolled .brand__type strong span,
+.site-header.is-scrolled .brand__type small {
+  color: #10241E !important;
+}
+.site-header.is-scrolled .desktop-nav > a,
+.site-header.is-scrolled .nav-menu__trigger {
+  color: #14251F !important;
+}
+.site-header.is-scrolled .desktop-nav > a:hover,
+.site-header.is-scrolled .desktop-nav > a.is-current,
+.site-header.is-scrolled .nav-menu__trigger:hover {
+  color: #187B58 !important;
+}
+.site-header.is-scrolled .btn--nav {
+  background: linear-gradient(115deg, #4BB878, #5AB7B1) !important;
+  border-color: rgba(17, 62, 49, .14) !important;
+  color: #08251F !important;
+}
+.site-header.is-scrolled .mobile-menu-button {
+  background: #F5FAF8 !important;
+  color: #11271F !important;
+  border-color: #CEDBD5 !important;
+}
+/* Desktop services dropdown follows the white header theme. */
+.site-header.is-scrolled .nav-menu__panel {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(22, 66, 54, .13) !important;
+  box-shadow: 0 14px 35px rgba(0, 29, 25, .14) !important;
+}
+.site-header.is-scrolled .nav-menu__panel strong { color: #122D25 !important; }
+.site-header.is-scrolled .nav-menu__panel small { color: #59756C !important; }
+.site-header.is-scrolled .nav-menu__panel > a:hover { background: #EDF8F2 !important; }
+.site-header.is-scrolled .nav-menu__panel > a > .icon { color: #20825D !important; }
+/* The mobile dropdown lives immediately after the fixed header. */
+.site-header.is-scrolled + .mobile-nav {
+  background: rgba(255, 255, 255, .99) !important;
+  box-shadow: 0 18px 40px rgba(0, 26, 22, .18) !important;
+}
+.site-header.is-scrolled + .mobile-nav > a {
+  color: #162A23 !important;
+  border-color: rgba(18, 58, 46, .12) !important;
+}
+.site-header.is-scrolled + .mobile-nav .mobile-nav__heading { color: #26664F !important; }
+.site-header.is-scrolled + .mobile-nav > a.mobile-nav__service { color: #146A50 !important; }
+@media (max-width: 520px) {
+  .site-header .brand__logo-wrap,
+  .site-footer .brand__logo-wrap {
+    width: 43px;
+    height: 43px;
+    flex-basis: 43px;
+  }
+  .brand__logo-wrap .brand__mark { width: 43px; height: 43px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand__logo-wrap .brand__mark { transition: none; }
+}
+
+
+/* ======================================================================
+   SENCHI GLOBAL — FINAL TWO-LOGO, TWO-STATE HEADER (Nov 2026)
+   FIRST SECTION: COMPLETELY TRANSPARENT HEADER, white text, white S logo.
+   AFTER FIRST SECTION: OPAQUE WHITE HEADER, black text, colored S logo.
+   The .is-scrolled class is set by js/site.js using section boundary.
+   ====================================================================== */
+.site-header:not(.is-scrolled) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding-top: 12px !important;
+}
+.site-header:not(.is-scrolled) .nav-shell {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.site-header:not(.is-scrolled) .brand__type strong {
+  color: #FFFFFF !important;
+}
+.site-header:not(.is-scrolled) .brand__type strong span {
+  color: #7CE8CB !important;
+}
+.site-header:not(.is-scrolled) .brand__type small {
+  color: #C4F3E5 !important;
+}
+.site-header:not(.is-scrolled) .desktop-nav > a,
+.site-header:not(.is-scrolled) .nav-menu__trigger {
+  color: #F9FFFC !important;
+  text-shadow: 0 1px 6px rgba(0,0,0,.45);
+}
+.site-header:not(.is-scrolled) .desktop-nav > a:hover,
+.site-header:not(.is-scrolled) .desktop-nav > a.is-current,
+.site-header:not(.is-scrolled) .nav-menu__trigger:hover {
+  color: #91F1D2 !important;
+}
+.site-header:not(.is-scrolled) .mobile-menu-button {
+  color: #FFFFFF !important;
+  background: rgba(0,31,27,.25) !important;
+  border: 1px solid rgba(255,255,255,.48) !important;
+}
+.site-header .brand__logo-wrap,
+.site-footer .brand__logo-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 58px;
+  width: 58px;
+  height: 58px;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.site-header .brand__logo-wrap .brand__mark,
+.site-footer .brand__logo-wrap .brand__mark {
+  grid-area: 1 / 1;
+  display: block;
+  width: 58px;
+  height: 58px;
+  max-width: none;
+  object-fit: contain !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: opacity .25s ease, visibility .25s ease !important;
+}
+.site-header:not(.is-scrolled) .brand__mark--default {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.site-header:not(.is-scrolled) .brand__mark--scrolled {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+.site-header.is-scrolled {
+  background: #FFFFFF !important;
+  background-color: #FFFFFF !important;
+  background-image: none !important;
+  border-bottom: 1px solid #E1E7E3 !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,.13) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding-top: 0 !important;
+}
+.site-header.is-scrolled .nav-shell { background: transparent !important; }
+.site-header.is-scrolled .brand__mark--default {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+.site-header.is-scrolled .brand__mark--scrolled {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.site-header.is-scrolled .brand__type strong,
+.site-header.is-scrolled .brand__type strong span,
+.site-header.is-scrolled .brand__type small,
+.site-header.is-scrolled .desktop-nav > a,
+.site-header.is-scrolled .nav-menu__trigger {
+  color: #111A17 !important;
+  text-shadow: none !important;
+}
+.site-header.is-scrolled .desktop-nav > a:hover,
+.site-header.is-scrolled .desktop-nav > a.is-current,
+.site-header.is-scrolled .nav-menu__trigger:hover {
+  color: #157D58 !important;
+}
+.site-header.is-scrolled .mobile-menu-button {
+  background: #F3F8F5 !important;
+  color: #111A17 !important;
+  border: 1px solid #D1DED7 !important;
+}
+.site-header.is-scrolled .btn--nav {
+  background: linear-gradient(115deg,#4BB878,#5AB7B1) !important;
+  color: #08251F !important;
+}
+.site-header.is-scrolled .nav-menu__panel,
+.site-header.is-scrolled + .mobile-nav {
+  background: #FFFFFF !important;
+  border-color: #DCE7E1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.site-header.is-scrolled + .mobile-nav a { color: #111A17 !important; }
+.site-header.is-scrolled + .mobile-nav a.mobile-nav__service { color: #146D56 !important; }
+@media (max-width: 720px) {
+  .site-header .brand__logo-wrap,
+  .site-footer .brand__logo-wrap { width: 48px; height: 48px; flex-basis: 48px; }
+  .site-header .brand__logo-wrap .brand__mark,
+  .site-footer .brand__logo-wrap .brand__mark { width: 48px; height: 48px; }
+  .site-header:not(.is-scrolled) { padding-top: 6px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header .brand__mark { transition: none !important; }
+}
