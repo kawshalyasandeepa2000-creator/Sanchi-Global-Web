@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "private": true,
   "type": "module",
-  "description": "SENCHI GLOBAL LLC emerald-green and coastal-teal glassmorphism visa website with 3D globe, tourist/student/work visa pages and GitHub Pages hosting.",
+  "description": "SENCHI GLOBAL LLC minimalist mint (#C4FFDD) and white (#FFFFFF) visa website with tourist, student, and work visa pages",
   "scripts": {
     "start": "node server.mjs",
     "dev": "node server.mjs",

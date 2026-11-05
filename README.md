@@ -1,3 +1,5 @@
+> **New Mint & White Edition:** The two requested brand colors are `#C4FFDD` and `#FFFFFF`. See [MINT_WHITE_THEME_GUIDE.md](MINT_WHITE_THEME_GUIDE.md).
+
 # SENCHI GLOBAL LLC — Green + Teal Website
 
 **New brand palette:** primary **#4BB878** (green) and secondary **#5AB7B1** (teal). This release applies both colors throughout the entire website: navigation, buttons, illustrations, 3D globe, logo, cards, forms, and all visa pages. Backgrounds alternate between dark forest green, emerald, and deep teal.

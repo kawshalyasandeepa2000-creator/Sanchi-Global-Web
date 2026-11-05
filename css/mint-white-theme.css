@@ -1,0 +1,228 @@
+/* =====================================================================
+   SENCHI GLOBAL LLC — MINT + WHITE EDITION | 2026-11-05
+   BRAND PALETTE — only #C4FFDD (mint) and #FFFFFF (white).
+   Neutral near-black is used exclusively for legible text/iconography;
+   photographs and the two customer-supplied logos keep their original colors.
+   This stylesheet MUST load last on each page.
+   ===================================================================== */
+:root {
+  color-scheme: light;
+  --mint: #C4FFDD;
+  --white: #FFFFFF;
+  --ink: #16352C;
+  --ink-deep: #102920;
+  --muted: #385D50;
+  --muted-dark: #34574A;
+  --blue: #C4FFDD;
+  --blue-deep: #16352C;
+  --blue-light: #C4FFDD;
+  --gold: #C4FFDD;
+  --gold-light: #C4FFDD;
+  --line: rgba(22,53,44,.17);
+  --background: #FFFFFF;
+  --glass: rgba(255,255,255,.92);
+  --shadow: 0 18px 44px rgba(0,0,0,.09);
+}
+html { color-scheme: light; }
+body, body.menu-open {background:#FFFFFF; color:var(--ink);}
+p, small {color:var(--muted);}
+h1,h2,h3,h4, strong {color:var(--ink-deep);}
+::selection {background:#C4FFDD;color:var(--ink-deep);}
+:focus-visible {outline:3px solid var(--ink-deep);outline-offset:3px;}
+em,.eyebrow,.eyebrow .icon {color:var(--ink-deep);}
+.glass {background:rgba(255,255,255,.85);border:1px solid rgba(22,53,44,.12);box-shadow:var(--shadow);}
+.reading-progress {background:#C4FFDD !important;}
+/* Global section rhythm: brand backgrounds alternate instead of dark colors */
+:is(.services-section,.about-section,.process-section,.faq-section,.related-section,.help-section,.timeline-section,.detail-faq,.legal-section,.site-footer) {
+  background:#FFFFFF !important; background-image:none !important; color:var(--ink) !important;
+}
+:is(.route-section,.journey-section,.statement-section,.contact-section,.detail-hero,.detail-intro,.documents-section,.service-cta-section,.legal-hero) {
+  background:#C4FFDD !important; background-image:none !important; color:var(--ink) !important;
+}
+:is(.services-section,.route-section,.about-section,.journey-section,.process-section,.statement-section,.faq-section,.contact-section,.detail-hero,.detail-intro,.help-section,.documents-section,.timeline-section,.detail-faq,.service-cta-section,.related-section,.legal-hero,.legal-section)::before {
+  background-image:none !important;
+}
+:is(.section-heading,.about-copy,.contact-copy,.faq-copy,.documents-copy,.services-header,.journey-head,.route-head,.route-panel,.detail-hero__copy,.related-section,.legal-content) :is(h1,h2,h3,h4,strong,p,small),
+:is(.section-heading h2,.about-copy h2,.contact-copy h2,.faq-copy h2,.documents-copy h2,.route-panel h3,.related-section h2,.detail-hero__copy h1) {
+  color:var(--ink-deep) !important;
+}
+:is(.section-heading,.about-copy,.contact-copy,.faq-copy,.documents-copy,.route-panel,.detail-hero__copy) p,
+:is(.section-heading p,.about-copy>p,.contact-copy>p,.faq-copy>p,.documents-copy>p,.route-panel p,.detail-hero__copy>p) {
+  color:var(--muted) !important;
+}
+:is(.eyebrow,.eyebrow--light,.eyebrow .icon,.route-head__stamp,.services-count,.services-count small,.route-panel__kicker,.route-panel__kicker span,.route-docs__heading) {color:var(--ink-deep) !important;}
+/* Buttons — two brand colors, black readable labels */
+:is(.btn--primary,.btn--nav,.btn--secondary) {
+  background:#C4FFDD !important;
+  background-image:none !important;
+  color:var(--ink-deep) !important;
+  border:1px solid rgba(22,53,44,.21) !important;
+  box-shadow:0 9px 22px rgba(0,0,0,.09) !important;
+}
+:is(.btn--primary,.btn--nav,.btn--secondary):hover {
+  background:#FFFFFF !important;
+  border-color:var(--ink-deep) !important;
+  box-shadow:0 12px 26px rgba(0,0,0,.13) !important;
+}
+:is(.btn--ghost,.btn--light) {
+  background:#FFFFFF !important;background-image:none !important;
+  color:var(--ink-deep) !important;
+  border:1px solid rgba(22,53,44,.24) !important;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+:is(.btn--ghost,.btn--light):hover {background:#C4FFDD !important;}
+.text-link,.text-link>span {color:var(--ink-deep) !important;}
+.text-link>span {background:#C4FFDD !important;border:1px solid rgba(22,53,44,.17);}
+.text-link:hover>span {background:#FFFFFF !important;}
+/* Transparent first-screen header; pure white after the first section */
+.site-header:not(.is-scrolled) {background:transparent !important;backdrop-filter:none !important;box-shadow:none !important;border:0 !important;}
+.site-header:not(.is-scrolled) .brand__type :is(strong,span,small),
+.site-header:not(.is-scrolled) :is(.desktop-nav>a,.nav-menu__trigger) {
+  color:var(--ink-deep) !important;text-shadow:none !important;
+}
+/* The before-scroll customer S artwork is white; darken its silhouette on the mint backdrop. */
+.site-header:not(.is-scrolled) .brand__mark--default {filter:brightness(0) saturate(0);}
+.site-header.is-scrolled {
+  background:#FFFFFF !important; background-image:none !important;
+  border-bottom:1px solid rgba(22,53,44,.14) !important;
+  box-shadow:0 6px 24px rgba(0,0,0,.09) !important;
+  backdrop-filter:none !important;
+}
+.site-header.is-scrolled .brand__mark--scrolled {filter:none;}
+.site-header.is-scrolled :is(.brand__type strong,.brand__type strong span,.brand__type small,.desktop-nav>a,.nav-menu__trigger) {
+  color:var(--ink-deep) !important;text-shadow:none !important;
+}
+.site-header :is(.desktop-nav>a,.nav-menu__trigger):hover,
+.site-header .desktop-nav>a.is-current {text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;}
+.nav-menu__panel,.mobile-nav,.site-header.is-scrolled .nav-menu__panel,.site-header.is-scrolled + .mobile-nav {
+  background:#FFFFFF !important;background-image:none !important;
+  border-color:rgba(22,53,44,.16) !important;box-shadow:0 15px 40px rgba(0,0,0,.12) !important;
+}
+.nav-menu__panel :is(strong,small),.mobile-nav :is(a,.mobile-nav__heading),.nav-menu__panel>a>.icon {color:var(--ink-deep) !important;}
+.nav-menu__panel>a:hover {background:#C4FFDD !important;}
+.nav-menu__icon,.nav-menu__icon.student,.nav-menu__icon.work {background:#C4FFDD !important;color:var(--ink-deep) !important;}
+.mobile-menu-button,.site-header:not(.is-scrolled) .mobile-menu-button,.site-header.is-scrolled .mobile-menu-button {
+  color:var(--ink-deep) !important;background:#FFFFFF !important;border:1px solid rgba(22,53,44,.25) !important;
+}
+/* Hero — mint-and-white brand wash over the original supplied picture */
+.hero {
+  background-color:#C4FFDD !important;
+  background-image:url('../assets/hero-background.webp') !important;
+  background-position:center center !important;
+  background-size:cover !important;
+}
+.hero::before {
+  content:'';position:absolute;inset:0;z-index:0;
+  background:linear-gradient(90deg,#C4FFDD 0%,#C4FFDD 23%,rgba(196,255,221,.97) 43%,rgba(196,255,221,.84) 60%,rgba(196,255,221,.28) 100%) !important;
+}
+.hero :is(h1,.hero__underline,.hero__description,.hero__eyebrow,.hero__reassurance strong,.hero__reassurance span,.hero-bottom__inner) {color:var(--ink-deep) !important;}
+.hero h1 .word-emphasis {color:var(--ink-deep) !important;text-decoration:underline;text-decoration-color:#FFFFFF;text-decoration-thickness:6px;text-underline-offset:5px;}
+.hero__underline::after {border-color:#FFFFFF !important;}
+.hero__eyebrow-dot,.hero-bottom__scroll i {background:#FFFFFF !important;box-shadow:0 0 0 5px rgba(22,53,44,.1);}
+.hero__eyebrow-line {background:var(--ink-deep) !important;}
+.hero__reassurance {border-color:rgba(22,53,44,.20) !important;}
+.hero__reassurance-icon,.floating-note,.floating-note__icon {background:#FFFFFF !important;border-color:rgba(22,53,44,.19) !important;color:var(--ink-deep) !important;}
+.hero-bottom {background:rgba(255,255,255,.61) !important;border-top:1px solid rgba(22,53,44,.13) !important;}
+/* Services — original card photographs, now with white brand panels */
+.service-card,.service-card:hover {background:#C4FFDD !important;border-color:rgba(22,53,44,.22) !important;}
+.service-card__body {background:#C4FFDD !important;}
+.service-card__body :is(h3,p),.services-footnote {color:var(--ink-deep) !important;}
+.service-card__body p {color:var(--muted) !important;}
+.service-card__line {background:rgba(22,53,44,.2) !important;}
+.service-card__visual {background-color:#C4FFDD !important;}
+/* Keep title overlays on PHOTOGRAPHS legible. */
+.service-card__counter,.service-card__chip {color:#FFFFFF !important;}
+.service-card__chip {background:rgba(0,0,0,.62) !important;border-color:rgba(255,255,255,.48) !important;}
+/* Application-pathway tabs */
+.route-shell {background:#FFFFFF !important;border:1px solid rgba(22,53,44,.16) !important;box-shadow:var(--shadow);}
+.route-shell__menu {background:#FFFFFF !important;border-right:1px solid rgba(22,53,44,.17) !important;}
+.route-tab {color:var(--ink-deep) !important;border:1px solid transparent !important;}
+.route-tab .icon {color:var(--ink-deep) !important;}
+.route-tab.is-active,.route-tab:hover {background:#C4FFDD !important;border-color:rgba(22,53,44,.2) !important;}
+.route-panel h3,.route-panel p,.route-panel__kicker,.route-panel__kicker span {color:var(--ink-deep) !important;}
+.route-docs {background:#C4FFDD !important;border-color:rgba(22,53,44,.2) !important;}
+.route-docs>div,.route-docs>div small,.route-docs__heading {color:var(--ink-deep) !important;border-color:rgba(22,53,44,.14) !important;}
+.route-head__stamp {background:#FFFFFF !important;border-color:rgba(22,53,44,.18) !important;}
+/* About & process */
+.about-visual__outer,.about-visual__center,.statement-art__orb {background:#C4FFDD !important;background-image:none !important;box-shadow:0 18px 55px rgba(0,0,0,.09) !important;}
+.about-visual__outer {border:1px solid rgba(22,53,44,.2);}
+.about-visual__center,.about-visual__orbit {border-color:rgba(22,53,44,.2) !important;color:var(--ink-deep) !important;}
+.about-quote,.about-tag {background:#FFFFFF !important;border-color:rgba(22,53,44,.18) !important;}
+.about-quote p,.about-quote__by,.about-values strong,.about-values small,.about-values>div>.icon,.about-tag {color:var(--ink-deep) !important;}
+.process-card {background:#C4FFDD !important;border:1px solid rgba(22,53,44,.16) !important;box-shadow:0 10px 30px rgba(0,0,0,.06) !important;}
+.process-card:hover {background:#FFFFFF !important;}
+.process-card :is(h3,p,.process-card__number,.process-card__icon) {color:var(--ink-deep) !important;}
+.process-card:not(:last-child)::after {background:#FFFFFF !important;color:var(--ink-deep) !important;}
+/* What We Do story chapters: retain user photos, replace color accents */
+.journey-tile {border-color:rgba(22,53,44,.24) !important;background:#FFFFFF !important;box-shadow:0 14px 36px rgba(0,0,0,.14) !important;}
+.journey-tile__index,.journey-tile__copy strong,.journey-tile__copy>span {color:#FFFFFF !important;}
+.journey-tile__copy small {color:#C4FFDD !important;}
+.journey-disclaimer {color:var(--ink-deep) !important;}
+/* Statement, FAQ & contact */
+.statement-section :is(h1,h2,h3,p,.statement-copy,.statement-copy strong) {color:var(--ink-deep) !important;}
+.faq-list,.faq-item {border-color:rgba(22,53,44,.22) !important;}
+.faq-question,.faq-copy>p,.faq-answer p {color:var(--ink-deep) !important;}
+.faq-question:hover {color:var(--muted) !important;}
+.faq-toggle,.faq-item.is-open .faq-toggle {background:#C4FFDD !important;color:var(--ink-deep) !important;border:1px solid rgba(22,53,44,.16);}
+.contact-mini__icon {background:#FFFFFF !important;color:var(--ink-deep) !important;border-color:rgba(22,53,44,.17) !important;}
+.contact-mini :is(strong,span),.contact-direct {color:var(--ink-deep) !important;}
+.contact-form-wrap {background:#FFFFFF !important;border-color:rgba(22,53,44,.17) !important;color:var(--ink-deep) !important;box-shadow:0 22px 55px rgba(0,0,0,.10) !important;}
+.contact-form-wrap :is(h3,label,.form-top,.form-intro,.form-note),.contact-form-wrap .inquiry-result p,.contact-form-wrap .inquiry-result pre {color:var(--ink-deep) !important;}
+.contact-form-wrap :is(input,textarea,select) {background:#FFFFFF !important;color:var(--ink-deep) !important;border:1px solid rgba(22,53,44,.24) !important;}
+.contact-form-wrap :is(input,textarea,select):focus {border-color:var(--ink-deep) !important;box-shadow:0 0 0 3px #C4FFDD !important;}
+.contact-form-wrap .inquiry-result {border-color:rgba(22,53,44,.2) !important;}
+/* Footer */
+.site-footer :is(p,small,strong,h3,.footer-column>a,.footer-column>p,.footer-bottom) {color:var(--ink-deep) !important;}
+.site-footer :is(a,.footer-bottom) {border-color:rgba(22,53,44,.16) !important;}
+/* Visa detail pages — photos stay unchanged */
+.detail-hero .detail-hero__copy :is(h1,p),.breadcrumbs,.breadcrumbs a,.breadcrumbs span,.breadcrumbs .icon {color:var(--ink-deep) !important;}
+.detail-hero__badge,.detail-hero__art--photo .detail-hero__badge {background:#FFFFFF !important;color:var(--ink-deep) !important;border:1px solid rgba(22,53,44,.2) !important;}
+.detail-hero__art--photo::before {background:radial-gradient(ellipse,#FFFFFF,transparent 70%) !important;}
+.detail-hero__photo-frame {background:#FFFFFF !important;border:1px solid rgba(22,53,44,.22) !important;box-shadow:0 20px 55px rgba(0,0,0,.13) !important;}
+.detail-intro :is(h2,h3,p,small,.ideal-list>div,.ideal-list .icon) {color:var(--ink-deep) !important;}
+.help-card {background:#FFFFFF !important;border:1px solid rgba(22,53,44,.15) !important;box-shadow:var(--shadow);}
+.help-card :is(h3,p,.help-card__number) {color:var(--ink-deep) !important;}
+.help-card__icon,.help-card:nth-child(even) .help-card__icon {background:#C4FFDD !important;color:var(--ink-deep) !important;}
+.documents-list {background:#C4FFDD !important;border-color:rgba(22,53,44,.18) !important;box-shadow:var(--shadow);}
+.documents-list :is(strong,span,p,small),.document-item :is(strong,small,p),.document-item__icon {color:var(--ink-deep) !important;}
+.document-item__icon {background:#FFFFFF !important;}
+.documents-note {background:#C4FFDD !important;border-left:3px solid var(--ink-deep) !important;color:var(--ink-deep) !important;}
+.timeline-grid::before {background:#C4FFDD !important;}
+.timeline-step__dot {background:#FFFFFF !important;border-color:var(--ink-deep) !important;}
+.timeline-step :is(h3,p,small),.timeline-step__number {color:var(--ink-deep) !important;}
+.service-cta {background:#FFFFFF !important;border:1px solid rgba(22,53,44,.14) !important;}
+.service-cta :is(h2,h3,p,small) {color:var(--ink-deep) !important;}
+.related-card {background:#C4FFDD !important;border-color:rgba(22,53,44,.17) !important;}
+.related-card:hover {background:#FFFFFF !important;}
+.related-card :is(strong,small,.icon),.related-card__icon {color:var(--ink-deep) !important;}
+.related-card__icon {background:#FFFFFF !important;}
+.legal-content {background:#C4FFDD !important;border:1px solid rgba(22,53,44,.17) !important;}
+.legal-content :is(h1,h2,h3,p,small,li) {color:var(--ink-deep) !important;}
+/* Mobile photo carousel needs the ORIGINAL photo contrast. Keep that intact. */
+@media (max-width:900px) {
+  .hero::before {background:linear-gradient(90deg,rgba(196,255,221,.98) 0%,rgba(196,255,221,.90) 53%,rgba(196,255,221,.60) 100%) !important;}
+}
+@media (max-width:720px) {
+  .hero::before {background:linear-gradient(180deg,rgba(196,255,221,.98) 0%,rgba(196,255,221,.98) 62%,rgba(196,255,221,.65) 100%) !important;}
+  .mobile-nav {background:#FFFFFF !important;}
+  #services .service-card, #services .service-card:hover {background:#C4FFDD !important;}
+  #services .service-card__body {background:linear-gradient(0deg,rgba(0,0,0,.90),rgba(0,0,0,.55) 58%,transparent) !important;}
+  #services .service-card__body :is(h3,p,.text-link),#services .service-card__counter::after {color:#FFFFFF !important;}
+  #services .service-card__body .text-link>span {color:var(--ink-deep) !important;background:#C4FFDD !important;}
+  #services .services-mobile-progress__fill {background:#C4FFDD !important;}
+  #services .services-mobile-progress {background:rgba(22,53,44,.15) !important;}
+}
+/* Fine-detail text, badges and borders on the interior sections. */
+.legal-hero :is(h1,h2,p),.documents-note strong,.document-item__count,.timeline-step>span,
+.route-tab :is(span,small),.ideal-list>div,.detail-intro__grid h3,.detail-intro__grid>div:nth-child(2)>p,
+.services-count small,.route-shell__content :is(small,strong) {
+  color:var(--ink-deep) !important;
+}
+.document-item,.detail-faq .faq-item,.route-docs>div {border-color:rgba(22,53,44,.16) !important;}
+.contact-section .form-dot {background:#C4FFDD !important;}
+.site-footer .brand__mark--default {filter:brightness(0) saturate(0);}
+/* Maintain clean contrast for the actual three service photos on phones. */
+@media (max-width:720px){
+  #services .service-card__counter,#services .service-card__counter::after,
+  #services .service-card__body :is(h3,p,.text-link) {color:#FFFFFF !important;}
+}
