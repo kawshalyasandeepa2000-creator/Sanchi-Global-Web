@@ -1,0 +1,70 @@
+/* SENCHI GLOBAL LLC | Your Travel Pathway full-section photo background
+   Change requested: the uploaded passport/plane/globe image REPLACES the copper
+   section background; it is NOT a separate card beneath the route widget.
+   Loaded last so it overrides the former warm-accent copper section surface.
+*/
+
+body #visa-guide.route-section {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  color: #FFFFFF !important;
+  background-color: #192320 !important;
+  background-image:
+    linear-gradient(105deg,
+      rgba(12, 27, 28, .83) 0%,
+      rgba(20, 24, 25, .62) 51%,
+      rgba(32, 23, 20, .43) 100%),
+    url('../assets/travel-pathway-world.webp') !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center 47% !important;
+}
+
+/* Prior theme generated decorative shapes. Do not let them mask the photo. */
+body #visa-guide.route-section::before,
+body #visa-guide.route-section::after {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  pointer-events: none;
+}
+
+/* All heading and tab elements sit above the image, with the original
+   bright white panel and interactive visa tabs unchanged. */
+body #visa-guide.route-section > .container {
+  position: relative;
+  z-index: 2;
+}
+body #visa-guide .route-head .section-heading h2,
+body #visa-guide .route-head .section-heading h2 em,
+body #visa-guide .route-head .section-heading p,
+body #visa-guide .route-head .section-heading .eyebrow,
+body #visa-guide .route-head .section-heading .eyebrow .icon {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+body #visa-guide .route-head .section-heading p {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .36);
+}
+body #visa-guide .route-shell {
+  box-shadow: 0 24px 60px rgba(8, 18, 18, .38) !important;
+}
+
+/* Maintain image coverage and contrast on narrow devices. */
+@media (max-width: 900px) {
+  body #visa-guide.route-section {
+    background-position: 52% center !important;
+    background-image:
+      linear-gradient(180deg,
+        rgba(13, 25, 27, .78) 0%,
+        rgba(16, 23, 24, .65) 50%,
+        rgba(17, 23, 22, .78) 100%),
+      url('../assets/travel-pathway-world.webp') !important;
+  }
+}
+@media (max-width: 540px) {
+  body #visa-guide.route-section {
+    background-position: 50% center !important;
+  }
+}

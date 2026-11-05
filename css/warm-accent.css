@@ -1,0 +1,178 @@
+/* =======================================================================
+   SENCHI GLOBAL LLC | WARM ACCENT UPDATE
+   Primary brand palette: #007474 (deep teal), #C4FFDD (mint), #FFFFFF (white)
+   Small accent only:    #BA6316 (warm copper)
+
+   This stylesheet is intentionally loaded AFTER three-color-theme.css.
+   It does not alter primary backgrounds, photos, mobile card behavior, or logos.
+   ======================================================================= */
+:root {
+  --senchi-warm-accent: #BA6316;
+}
+
+/* Small copper detail beside the opening headline. */
+.hero__eyebrow-dot {
+  background: #BA6316 !important;
+  box-shadow: 0 0 0 5px rgba(186, 99, 22, .17) !important;
+}
+.hero__eyebrow-line { background: #BA6316 !important; }
+
+/* Small warm sparkle marks on selected LIGHT section headings only. */
+body .services-section .container .section-heading .eyebrow .icon,
+body .process-section .container .section-heading .eyebrow .icon,
+body .faq-section .container .section-heading .eyebrow .icon {
+  color: #BA6316 !important;
+}
+
+/* Keep card photos and teal labels; accent only the chip/arrow outlines. */
+#services .service-card__chip {
+  border-color: #BA6316 !important;
+  box-shadow: 0 0 0 1px rgba(186, 99, 22, .20) !important;
+}
+#services .service-card__body .text-link > span {
+  border-color: #BA6316 !important;
+}
+
+/* The small pathway badge and numbered process steps. */
+body .route-section .route-head__stamp {
+  border-color: #BA6316 !important;
+}
+body .route-section .route-head__stamp .icon {
+  color: #BA6316 !important;
+}
+body .process-section .process-card .process-card__number {
+  color: #BA6316 !important;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+/* The FAQ remains mint and teal, with a restrained warm outline. */
+body .faq-section .faq-toggle,
+body .faq-section .faq-item.is-open .faq-toggle,
+body .detail-faq .faq-toggle,
+body .detail-faq .faq-item.is-open .faq-toggle {
+  border-color: #BA6316 !important;
+}
+
+/* Visa-detail photos and document notes receive a hairline accent. */
+body .detail-hero__photo-frame {
+  border: 2px solid #BA6316 !important;
+}
+body .documents-note {
+  border-left-color: #BA6316 !important;
+}
+
+/* No changes to the mobile swipe layout or desktop grid. */
+
+
+/* =======================================================================
+   YOUR TRAVEL PATHWAY — COPPER SECTION UPDATE
+   Scope: homepage #visa-guide only; all other website sections stay as before.
+   ======================================================================= */
+body #visa-guide.route-section {
+  background: #BA6316 !important;
+  background-image: none !important;
+  color: #FFFFFF !important;
+}
+body #visa-guide.route-section::before {
+  background: none !important;
+  background-image: none !important;
+}
+/* High-contrast headings on the copper backdrop. Keep teal text inside
+   the white visa-selection panel — those are separate surfaces. */
+body #visa-guide .route-head .section-heading h2,
+body #visa-guide .route-head .section-heading p {
+  color: #FFFFFF !important;
+}
+body #visa-guide .route-head .section-heading h2 em,
+body #visa-guide .route-head .section-heading .eyebrow,
+body #visa-guide .route-head .section-heading .eyebrow .icon {
+  color: #C4FFDD !important;
+}
+body #visa-guide .route-head__stamp {
+  background: #FFFFFF !important;
+  color: #BA6316 !important;
+  border: 1px solid #FFFFFF !important;
+  box-shadow: 0 7px 22px rgba(0, 0, 0, .12) !important;
+}
+body #visa-guide .route-head__stamp .icon {
+  color: #BA6316 !important;
+}
+/* Crisp, layered navigation card against the copper section. */
+body #visa-guide .route-shell {
+  background: #FFFFFF !important;
+  border: 1px solid #FFFFFF !important;
+  box-shadow: 0 24px 55px rgba(0, 0, 0, .20) !important;
+}
+body #visa-guide .route-shell__menu {
+  background: #FFFFFF !important;
+}
+body #visa-guide .route-tab.is-active,
+body #visa-guide .route-tab:hover {
+  background: #BA6316 !important;
+  border-color: #BA6316 !important;
+  color: #FFFFFF !important;
+}
+body #visa-guide .route-tab.is-active :is(.icon,span,small),
+body #visa-guide .route-tab:hover :is(.icon,span,small) {
+  color: #FFFFFF !important;
+}
+body #visa-guide .route-tab:not(.is-active):not(:hover) :is(.icon,span,small) {
+  color: #007474 !important;
+}
+body #visa-guide .route-docs {
+  background: #C4FFDD !important;
+}
+body #visa-guide .route-panel :is(h3,p,.route-panel__kicker,.route-panel__kicker span),
+body #visa-guide .route-docs :is(.icon,span,small,p) {
+  color: #007474 !important;
+}
+/* Keep teal action buttons, matching the main SENCHI brand color. */
+body #visa-guide .route-panel .btn--primary {
+  background: #007474 !important;
+  border-color: #007474 !important;
+  color: #FFFFFF !important;
+}
+body #visa-guide .route-panel .btn--primary:hover {
+  background: #C4FFDD !important;
+  color: #007474 !important;
+}
+
+/* Mandatory inquiry contact number — readable helper and clear validation */
+.contact-form-wrap .contact-phone-label { margin-top: 2px; }
+.contact-form-wrap .phone-help {
+  display: block;
+  color: #007474 !important;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+  opacity: .88;
+  margin-top: 1px;
+}
+.contact-form-wrap input[name="phone"]:user-invalid {
+  border-color: #BA6316 !important;
+  box-shadow: 0 0 0 2px rgba(186, 99, 22, .16) !important;
+}
+
+/* Keep required-field asterisks on the same line as their labels. */
+.contact-form-wrap .field-label {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 4px;
+  color: #007474 !important;
+  font-size: inherit;
+  font-weight: inherit;
+}
+.contact-form-wrap .field-label b {
+  color: #BA6316 !important;
+  font-weight: 900;
+}
+
+/* Specific request: white headline ONLY in Your Travel Pathway.
+   Keep the copper background and the mint eyebrow unchanged. */
+body #visa-guide .route-head .section-heading h2,
+body #visa-guide .route-head .section-heading h2 em {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}

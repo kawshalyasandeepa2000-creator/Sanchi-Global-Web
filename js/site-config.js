@@ -13,6 +13,11 @@ window.SENCHI_CONFIG = {
   whatsappNumber: '',     // International digits only; no + sign
   officeAddress: '',      // Only enter your confirmed physical office address
   officeHours: '',        // Only enter confirmed opening hours
+  branch: {
+    label: 'Sharjah Branch',
+    officeName: 'SENCHI Global.LLC',
+    address: 'Office No. 204, 2nd Floor, C Block, Dubai Islamic Bank Building, Al Qasimia, Al Nad, Sharjah, UAE'
+  },
   social: {
     instagram: '',
     facebook: '',

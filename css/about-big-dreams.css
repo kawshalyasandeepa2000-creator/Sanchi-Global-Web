@@ -1,0 +1,98 @@
+/* ========================================================================
+   SENCHI GLOBAL LLC — ABOUT US PHOTO UPDATE • 2026-11-05
+   Purpose: replace the circular placeholder with the user's supplied
+   approved traveler-couple airport photograph; preserve all other sections.
+   Loaded last on each HTML page to override the earlier illustration CSS.
+   ======================================================================== */
+
+/* Keep the section in the established teal brand theme. */
+#about.about-section {
+  position: relative;
+  overflow: clip;
+  background: #007474 !important;
+  background-image: none !important;
+  isolation: isolate;
+}
+
+#about.about-section .about-grid {
+  position: relative;
+  z-index: 1;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(28px, 5.5vw, 90px);
+}
+
+/* Actual CSS background photo, fitted to the left illustration panel. */
+#about.about-section .about-visual {
+  position: relative;
+  width: 100%;
+  min-height: 560px;
+  aspect-ratio: 0.82;
+  background-color: #063936;
+  background-image: url('../assets/about-travelers.webp') !important;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid rgba(196,255,221,.48);
+  border-radius: 28px;
+  box-shadow: 0 25px 65px rgba(0, 33, 33, .32), 0 5px 20px rgba(0,0,0,.12);
+  overflow: hidden;
+  transition: transform .5s ease, box-shadow .5s ease;
+}
+
+#about.about-section .about-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.08), transparent 35%, rgba(0,30,30,.18) 100%);
+  pointer-events: none;
+}
+
+/* The old circular globe, badge and floating quote are replaced by the photo. */
+#about.about-section .about-visual > * { display: none !important; }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  #about.about-section .about-visual:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 33px 78px rgba(0, 33, 33, .42);
+  }
+}
+
+/* The editorial copy stays readable on top of the teal feature section. */
+#about.about-section .about-copy { min-width: 0; }
+#about.about-section .about-copy :is(h2,p,strong,small) { color: #FFFFFF !important; }
+#about.about-section .about-copy :is(em,.eyebrow,.eyebrow .icon) { color: #C4FFDD !important; }
+#about.about-section .about-copy .about-values { padding: 19px 0; border-top: 1px solid rgba(196,255,221,.22); border-bottom: 1px solid rgba(196,255,221,.22); }
+#about.about-section .about-copy .text-link { color: #FFFFFF !important; }
+#about.about-section .about-copy .text-link > span { background: #C4FFDD !important; }
+
+@media (max-width: 900px) {
+  #about.about-section .about-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  #about.about-section .about-visual {
+    width: min(100%, 600px);
+    min-height: 440px;
+    max-height: 610px;
+    aspect-ratio: 4 / 5;
+    margin-inline: auto;
+  }
+  #about.about-section .about-copy { width: min(100%, 650px); margin-inline: auto; }
+}
+
+@media (max-width: 480px) {
+  #about.about-section .about-visual {
+    min-height: 390px;
+    max-height: none;
+    aspect-ratio: 4 / 5;
+    border-radius: 22px;
+    background-position: center center;
+  }
+  #about.about-section .about-grid { gap: 27px; }
+  #about.about-section .about-copy h2 { font-size: clamp(30px, 8vw, 40px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #about.about-section .about-visual { transition: none; }
+}
