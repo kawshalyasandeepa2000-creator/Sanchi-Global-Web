@@ -1,15 +1,19 @@
 {
-  "name": "senchi-global-llc-website",
-  "version": "3.0.0",
+  "name": "senchi-global-llc-static-cloudflare",
+  "version": "5.0.0",
   "private": true,
   "type": "module",
-  "description": "SENCHI GLOBAL LLC minimalist mint (#C4FFDD) and white (#FFFFFF) visa website with tourist, student, and work visa pages",
+  "description": "SENCHI GLOBAL LLC static website with email inquiries via Web3Forms (no custom backend)",
   "scripts": {
-    "start": "node server.mjs",
-    "dev": "node server.mjs",
-    "check": "node --check js/site.js && node --check js/site-config.js && node --check server.mjs"
+    "start": "wrangler pages dev public --port 8788",
+    "dev": "wrangler pages dev public --port 8788",
+    "check": "node --check public/js/site.js && node --check public/js/site-config.js",
+    "deploy": "wrangler pages deploy public --project-name sanchi-global-web"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }

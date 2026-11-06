@@ -1,0 +1,3 @@
+/* Optional Cloudflare Turnstile placement, visible only if configured */
+.senchi-turnstile { padding: 10px 0 6px; min-height: 58px; }
+.senchi-turnstile iframe { max-width: 100%; }

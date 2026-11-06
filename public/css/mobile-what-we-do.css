@@ -1,0 +1,227 @@
+/* ============================================================================
+   SENCHI GLOBAL LLC — WHAT WE DO: MOBILE PHOTO CAROUSEL
+   Only the WHAT WE DO (#services) section on phones (up to 720px).
+   Desktop / tablet layout above 720px stays precisely as it was.
+   ============================================================================ */
+@media (max-width: 720px) {
+  #services .services-header {
+    margin-bottom: 23px;
+  }
+
+  /* Two image cards visible at once, drag/swipe sideways to reveal the third. */
+  #services .service-grid {
+    display: flex !important;
+    grid-template-columns: none !important;
+    align-items: stretch;
+    gap: 11px !important;
+    width: 100%;
+    margin: 0;
+    padding: 3px 1px 12px;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1px;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    touch-action: pan-x pan-y;
+  }
+  #services .service-grid::-webkit-scrollbar { display: none; }
+
+  #services .service-card {
+    position: relative;
+    isolation: isolate;
+    display: block !important;
+    flex: 0 0 calc((100% - 11px) / 2);
+    width: calc((100% - 11px) / 2);
+    min-width: 0;
+    min-height: clamp(290px, 97vw, 470px) !important;
+    height: clamp(290px, 97vw, 470px);
+    overflow: hidden;
+    border: 1px solid rgba(152, 234, 202, .6);
+    border-radius: 18px;
+    background: #092b29;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    box-shadow: 0 12px 30px rgba(0, 14, 15, .26);
+    transform: none !important;
+    opacity: 1 !important;
+    transition: border-color .3s, box-shadow .3s !important;
+  }
+  #services .service-card:hover {
+    transform: none !important;
+  }
+  #services .service-card:focus-within {
+    border-color: #9cf4d2;
+    box-shadow: 0 0 0 2px rgba(156, 244, 210, .35);
+  }
+
+  /* Full-bleed photography from the three journey images in this project. */
+  #services .service-card__visual {
+    position: absolute !important;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100% !important;
+    min-height: 0 !important;
+    overflow: hidden;
+    border-radius: inherit;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+  }
+  #services .service-card--tourist .service-card__visual {
+    background-image: url("../assets/journey-tourist.jpg") !important;
+    background-position: center center !important;
+  }
+  #services .service-card--student .service-card__visual {
+    background-image: url("../assets/journey-student.jpg") !important;
+    background-position: 49% center !important;
+  }
+  #services .service-card--work .service-card__visual {
+    background-image: url("../assets/journey-work.jpg") !important;
+    background-position: 61% center !important;
+  }
+  /* The desktop photo remains intact and reappears automatically above 720px. */
+  #services .service-card__photo { display: none !important; }
+
+  /* Subtle overlay for readable labels. */
+  #services .service-card__visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border: 0;
+    border-radius: 0;
+    background: linear-gradient(180deg,
+      rgba(0, 18, 20, .52) 0%,
+      rgba(0, 18, 20, .08) 32%,
+      rgba(0, 25, 23, .30) 52%,
+      rgba(0, 24, 22, .95) 100%);
+    pointer-events: none;
+  }
+
+  #services .service-card__counter {
+    z-index: 4;
+    top: 14px;
+    left: 12px;
+    font-size: 0 !important;
+    text-shadow: 0 1px 7px rgba(0, 0, 0, .68);
+  }
+  #services .service-card__counter::after {
+    display: block;
+    font-size: clamp(8px, 2.1vw, 10px);
+    font-weight: 800;
+    letter-spacing: .14em;
+    color: #fff;
+  }
+  #services .service-card--tourist .service-card__counter::after { content: "01 / DISCOVER"; }
+  #services .service-card--student .service-card__counter::after { content: "02 / LEARN"; }
+  #services .service-card--work .service-card__counter::after { content: "03 / GROW"; }
+  #services .service-card__chip { display: none !important; }
+
+  #services .service-card__body {
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: 0;
+    padding: 22px 12px 17px !important;
+    background: linear-gradient(0deg, rgba(2, 35, 32, .97) 3%, rgba(2, 35, 32, .79) 42%, transparent 100%);
+  }
+  #services .service-card__body h3 {
+    color: #fff !important;
+    font-size: clamp(17px, 4.7vw, 24px) !important;
+    line-height: 1.17;
+    letter-spacing: -.045em;
+    margin: 0 0 9px;
+    text-wrap: balance;
+    text-shadow: 0 2px 8px rgba(0,0,0,.52);
+  }
+  #services .service-card__body p {
+    color: #E2F5EE !important;
+    font-size: clamp(9px, 2.55vw, 11px) !important;
+    line-height: 1.42;
+    min-height: 0;
+    margin: 0 0 12px;
+  }
+  #services .service-card__line {
+    display: block;
+    margin: 0 0 11px;
+    background: rgba(230, 255, 246, .3);
+  }
+  #services .service-card__body .text-link {
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
+    font-size: clamp(9px, 2.6vw, 11px) !important;
+    font-weight: 750;
+    white-space: normal;
+  }
+  #services .service-card__body .text-link > span {
+    display: grid;
+    place-items: center;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.20);
+    background: rgba(76,184,139,.22);
+    color: #EBFFF4;
+  }
+  #services .service-card__body .text-link .icon { width: 14px; height: 14px; }
+
+  /* Thin mint progress track below the swipe cards, like the reference video. */
+  #services .services-mobile-progress {
+    display: block;
+    height: 3px;
+    margin: 3px 2px 0;
+    border-radius: 99px;
+    background: rgba(171, 230, 214, .20);
+    overflow: hidden;
+  }
+  #services .services-mobile-progress__fill {
+    display: block;
+    height: 100%;
+    width: 35%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #4BB878, #88E9C3);
+    transform-origin: left center;
+    transition: width 120ms ease;
+    will-change: width;
+  }
+  #services .services-mobile-swipe-hint {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 2px 0;
+    color: #A4EBD3;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .11em;
+  }
+  #services .services-footnote { margin-top: 20px; }
+}
+
+/* Hide the mobile-only indicator on desktops and tablets. */
+@media (min-width: 721px) {
+  #services .services-mobile-progress,
+  #services .services-mobile-swipe-hint { display: none !important; }
+}
+
+@media (max-width: 350px) {
+  #services .service-grid { gap: 8px !important; }
+  #services .service-card {
+    flex-basis: calc((100% - 8px) / 2);
+    width: calc((100% - 8px) / 2);
+  }
+  #services .service-card__body { padding-inline: 10px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #services .service-card,
+  #services .services-mobile-progress__fill { transition: none !important; }
+}

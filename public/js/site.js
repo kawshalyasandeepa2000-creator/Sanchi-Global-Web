@@ -1,0 +1,898 @@
+/*
+ * SENCHI GLOBAL LLC — independent, dependency-free JavaScript website.
+ * Branding / contact / social handles: js/site-config.js
+ * Service copy and page structure: this file.
+ */
+(() => {
+  'use strict';
+
+  const config = window.SENCHI_CONFIG || {};
+  const page = document.body.dataset.page || 'home';
+  const root = document.getElementById('site-root');
+  const esc = (value = '') => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+
+  const glyphs = {
+    arrow: '<path d="M5 12h14m-7-7 7 7-7 7"/>',
+    arrowUp: '<path d="M7 17 17 7M7 7h10v10"/>',
+    chevron: '<path d="m6 9 6 6 6-6"/>',
+    plane: '<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+    travel: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
+    study: '<path d="m2 10 10-6 10 6-10 6-10-6Z"/><path d="M6 12.5V18c4 3 8 3 12 0v-5.5M22 10v7"/>',
+    work: '<rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13a22 22 0 0 0 18 0M12 12v3"/>',
+    check: '<path d="m5 12 4 4L19 6"/>',
+    circleCheck: '<circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/>',
+    document: '<path d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M15 3v5h5M8 13h8M8 17h6"/>',
+    compass: '<circle cx="12" cy="12" r="9"/><path d="m16.7 7.3-3.2 6.2-6.2 3.2 3.2-6.2 6.2-3.2Z"/>',
+    sparkle: '<path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/>',
+    processTalk: '<rect x="3" y="4" width="18" height="14" rx="4"/><path d="M8 18v3l5-3"/><path d="M7.5 9h9M7.5 13h6"/>',
+    processMap: '<path d="M3 7.5 9 4l6 3.5 6-3v12L15 20l-6-3.5-6 3Z"/><path d="M9 4v12.5M15 7.5V20"/><path d="m10 12 1.5 1.5 3-3"/>',
+    processList: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3.5h6M9 8h6M9 13h6M9 18h6"/><path d="m7 8 1 1 1-1m-2 5 1 1 1-1"/>',
+    processLaunch: '<path d="M14 5c2-1.5 4.5-2 7-2-.1 2.5-.7 5-2.2 7l-6.2 6.2-4.7-4.7Z"/><path d="m8 12-3 1-2 4 5-1m4 0 1 5 4-2 1-3"/><circle cx="15.6" cy="8.5" r="1.5"/><path d="m5 19-2 2m5-2-1 2"/>',
+    chat: '<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9.5 9.5 0 0 1-4-.8L3 21l1.8-5.5a9.5 9.5 0 0 1-.8-4A8.5 8.5 0 1 1 21 11.5Z"/>',
+    shield: '<path d="M12 2 20 6v6c0 5-3 8-8 10-5-2-8-5-8-10V6l8-4Z"/><path d="m9 12 2 2 4-4"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/>',
+    phone: '<path d="M7 3h3l1 5-2 2a16 16 0 0 0 5 5l2-2 5 1v3a4 4 0 0 1-4 4A15 15 0 0 1 3 7a4 4 0 0 1 4-4Z"/>',
+    pin: '<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    minus: '<path d="M5 12h14"/>',
+    menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+    close: '<path d="M5 5 19 19M19 5 5 19"/>',
+    copy: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/>',
+    heart: '<path d="M20.8 5.8a5 5 0 0 0-7.1 0L12 7.5l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 21l8.8-8.1a5 5 0 0 0 0-7.1Z"/>',
+    whatsapp: '<path d="M20.5 11.5a8.5 8.5 0 0 1-12.4 7.6L3 21l1.7-5.1A8.5 8.5 0 1 1 20.5 11.5Z"/><path d="M8.1 8.3c.3-.6.8-.6 1.2-.1l1.2 1.6c.2.3.2.5 0 .8l-.7.8a9 9 0 0 0 3.2 3.1l.8-.7c.2-.2.5-.2.8 0l1.7 1.1c.5.3.5.7.2 1.1-.5.7-1.1.9-1.8.8-3.3-.4-7.2-4.3-7.4-7.4 0-.4.2-.8.8-1.1Z"/>',
+    instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
+    facebook: '<path d="M15 21v-8h3l.5-4H15V7c0-1.2.5-2 2-2h2V2.5A24 24 0 0 0 16 2c-3 0-5 1.7-5 5v2H8v4h3v8"/>',
+    linkedin: '<rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.1M11 17v-7h3v1a3.2 3.2 0 0 1 6 2v4"/>',
+    tiktok: '<path d="M13 3v12a4.5 4.5 0 1 1-4.5-4.5M13 3c1.1 3.1 3.3 4.9 6.5 5v3c-2.8 0-5-1-6.5-2.5"/>',
+    youtube: '<rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3V9Z"/>',
+    star: '<path d="m12 2 2.7 6.7L22 12l-7.3 3.3L12 22l-2.7-6.7L2 12l7.3-3.3L12 2Z"/>',
+  };
+  const icon = (name, size = 20, cls = '') => `<svg class="icon ${cls}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${glyphs[name] || glyphs.sparkle}</svg>`;
+
+  const socialLogo = (name, label) => {
+    const logos = {
+      instagram: `<svg class="social-brand-logo social-brand-logo--instagram" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#feda75"/><stop offset="35%" stop-color="#fa7e1e"/><stop offset="62%" stop-color="#d62976"/><stop offset="82%" stop-color="#962fbf"/><stop offset="100%" stop-color="#4f5bd5"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig-grad)"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="17.2" cy="6.8" r="1.2" fill="#fff"/></svg>`,
+      facebook: `<svg class="social-brand-logo social-brand-logo--facebook" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1877F2"/><path d="M13.5 20v-6.3h2.1l.4-2.7h-2.5V9.3c0-.8.3-1.6 1.6-1.6H16V5.4s-.8-.1-1.6-.1c-3 0-4.5 1.7-4.5 4.2v1.5H8v2.7h1.9V20h3.6Z" fill="#fff"/></svg>`,
+      whatsapp: `<svg class="social-brand-logo social-brand-logo--whatsapp" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#25D366"/><path d="M7.5 18.3 8.4 15a6.6 6.6 0 1 1 2.8 2.6l-3.7.7Zm3.7-2.1c2.5 1.4 5.7-.3 6.1-3 .5-2.7-1.4-5.3-4.1-5.7-2.7-.4-5.2 1.5-5.5 4.2-.1 1 .1 2 .6 2.8l.2.3-.5 1.8 1.8-.4.4.2Zm3.8-2.3c-.2-.1-1.3-.6-1.5-.7-.2-.1-.3-.1-.5.1l-.4.5c-.1.2-.3.2-.5.1-.9-.4-1.7-1-2.3-1.8-.2-.2 0-.4.1-.5l.4-.4c.1-.2.2-.3.3-.5l-.7-1.6c-.1-.2-.3-.2-.4-.2h-.4c-.1 0-.4 0-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.1 1.6 2.5 3.9 3.4 2.3.9 2.3.6 2.7.6.4-.1 1.3-.5 1.4-1.1.2-.5.2-1 .1-1-.1 0-.3-.1-.5-.2Z" fill="#fff"/></svg>`,
+      linkedin: `<svg class="social-brand-logo social-brand-logo--linkedin" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4" fill="#0A66C2"/><circle cx="7" cy="8" r="1.2" fill="#fff"/><rect x="5.8" y="10" width="2.4" height="8" fill="#fff"/><path d="M10.2 10h2.3v1.1c.4-.7 1.3-1.4 2.7-1.4 2.9 0 3.5 1.9 3.5 4.4V18h-2.4v-3.4c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8V18h-2.2v-8Z" fill="#fff"/></svg>`,
+      tiktok: `<svg class="social-brand-logo social-brand-logo--tiktok" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" fill="#111"/><path d="M14.1 6.3c.8 1.1 1.7 1.7 3.1 1.9v2c-1.3 0-2.3-.3-3.1-1V14a3.9 3.9 0 1 1-3.9-3.9h.4v2.1a1.9 1.9 0 1 0 1.6 1.9V6.3h1.9Z" fill="#fff"/></svg>`,
+      youtube: `<svg class="social-brand-logo social-brand-logo--youtube" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="5" fill="#FF0000"/><path d="m10 9 5 3-5 3V9Z" fill="#fff"/></svg>`
+    };
+    return `<span class="social-brand-wrap" aria-hidden="true">${logos[name] || icon(name, 18)}</span><span class="sr-only">${esc(label)}</span>`;
+  };
+  const ctaLink = (service) => `index.html?service=${encodeURIComponent(service || '')}#contact`;
+  const whatsappGuidanceUrl = (serviceTitle) => {
+    const phone = String(config.whatsappNumber || '').replace(/\D/g, '');
+    return phone ? `https://wa.me/${phone}?text=${encodeURIComponent(`Hello SENCHI GLOBAL LLC, I would like detailed guidance about the ${serviceTitle} service.`)}` : '';
+  };
+
+
+  // Contact links for the About Us and Our Process calls to action.
+  // Uses the same configured WhatsApp number as the social footer.
+  const whatsappContactUrl = (message) => {
+    const phone = String(config.whatsappNumber || '').replace(/\D/g, '');
+    return phone ? `https://wa.me/${phone}?text=${encodeURIComponent(message)}` : 'index.html#contact';
+  };
+  const whatsappCTALogo = () => `<svg class="whatsapp-cta-logo" viewBox="0 0 24 24" focusable="false" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#25D366"/><path d="M7.5 18.3 8.4 15a6.6 6.6 0 1 1 2.8 2.6l-3.7.7Zm3.7-2.1c2.5 1.4 5.7-.3 6.1-3 .5-2.7-1.4-5.3-4.1-5.7-2.7-.4-5.2 1.5-5.5 4.2-.1 1 .1 2 .6 2.8l.2.3-.5 1.8 1.8-.4.4.2Zm3.8-2.3c-.2-.1-1.3-.6-1.5-.7-.2-.1-.3-.1-.5.1l-.4.5c-.1.2-.3.2-.5.1-.9-.4-1.7-1-2.3-1.8-.2-.2 0-.4.1-.5l.4-.4c.1-.2.2-.3.3-.5l-.7-1.6c-.1-.2-.3-.2-.4-.2h-.4c-.1 0-.4 0-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.1 1.6 2.5 3.9 3.4 2.3.9 2.3.6 2.7.6.4-.1 1.3-.5 1.4-1.1.2-.5.2-1 .1-1-.1 0-.3-.1-.5-.2Z" fill="#fff"/></svg>`;
+
+  const services = {
+    tourist: {
+      number:'01', title:'Tourist Visa', label:'EXPLORE THE WORLD', short:'See more of the world with a clearer plan.',
+      icon:'travel', class:'tourist', url:'tourist-visa.html',
+      heroTitle:'Discover more. Worry less about the paperwork.',
+      heroText:'A new destination is exciting. We help you understand the tourist visa journey, organize supporting evidence, and approach the application process with clarity.',
+      intro:'Whether you plan a city break, sightseeing holiday, or vacation abroad, requirements depend on the destination, nationality, and proposed length of stay.',
+      ideal:['Sightseeing and leisure holidays','City breaks and tourist trips','Vacation travel and cultural experiences','Other tourism-focused short stays, where permitted'],
+      help:[
+        ['Choose the right route','Understand the tourist visa category, eligibility basics and destination-specific expectations.'],
+        ['Build your checklist','Identify forms and supporting papers commonly requested for your circumstances.'],
+        ['Review travel evidence','Organize accommodation, itinerary, financial documents and invitation evidence if needed.'],
+        ['Prepare the application','Get help understanding forms, appointments, biometrics and submission instructions.'],
+        ['Plan for next steps','Know how to follow updates, respond to legitimate requests and prepare for travel.'],
+        ['Stay informed','Understand permitted activities, intended stay and any relevant entry conditions.']
+      ],
+      docs:[
+        ['Passport and identity','Valid passport and identity details, meeting destination rules.'],
+        ['Application and photo','Completed forms and a recent photograph, if required.'],
+        ['Travel plan','Proposed itinerary, accommodation details and relevant bookings.'],
+        ['Financial support','Bank statements, income evidence or sponsor documentation, as applicable.'],
+        ['Purpose of trip','Sightseeing plans and relevant evidence of the purpose of your holiday.'],
+        ['Personal circumstances','Work, study or home-ties evidence and travel insurance where required.']
+      ],
+      steps:[['Explore your plans','Tell us where you hope to go, why and for approximately how long.'],['Check the requirements','Review the visa route and build your destination-specific document list.'],['Prepare the file','Gather, organize and review the application materials and appointment steps.'],['Move forward','Follow the official process and prepare for the outcome and entry rules.']],
+      faqs:[
+        ['Can I work while on a tourist visa?','Generally no. Tourist visas commonly prohibit employment or paid work. The permitted activities depend on the destination and visa category.'],
+        ['Do I have to book travel before applying?','Not always. Some destinations request a proposed itinerary while others have different requirements. Check the official rules before making nonrefundable plans.'],
+        ['Can you guarantee a tourist visa?','No. Approval and entry decisions rest with the relevant visa and border authorities.']
+      ],
+      note:'Travel documents and tourist entry conditions vary widely. Do not make nonrefundable travel commitments solely on the assumption of visa approval.'
+    },
+    student: {
+      number:'02', title:'Student Visa', label:'LEARN WITHOUT BORDERS', short:'Give your academic future a strong start.',
+      icon:'study', class:'student', url:'student-visa.html',
+      heroTitle:'A bigger education journey begins with a clear plan.',
+      heroText:'From understanding the documents behind an offer of admission to preparing financial evidence, we help you navigate the student visa application pathway.',
+      intro:'International study combines school admissions, immigration requirements and important deadlines. A structured approach can make each stage easier to understand.',
+      ideal:['Students preparing for an overseas course','Applicants holding an admission offer','Students gathering tuition and funding evidence','Applicants planning visa interviews or biometrics'],
+      help:[
+        ['Understand the student route','Review the appropriate visa category for your course, institution and destination.'],
+        ['Organize admission records','Check the offer letter and required institution-issued enrollment or sponsorship documents.'],
+        ['Structure financial evidence','Understand how tuition, living costs and sponsor proof may need to be shown.'],
+        ['Build a complete file','Prepare academic records, statements, forms and supporting identification.'],
+        ['Get ready for key steps','Understand official interview, medical, language or biometrics requirements if they apply.'],
+        ['Prepare for arrival','Review timing, travel plans and any conditions attached to studying abroad.']
+      ],
+      docs:[
+        ['Passport and photos','Valid passport, photographs and any applicable identity documents.'],
+        ['Admission confirmation','Offer or acceptance letter and any country-specific institution documents.'],
+        ['Academic background','Transcripts, certificates and relevant study history.'],
+        ['Proof of funds','Tuition and living-expense evidence, scholarship or sponsor records.'],
+        ['Language and study plan','Language test results or study statements where requested.'],
+        ['Additional requirements','Health checks, insurance, police records or guardian consent, if applicable.']
+      ],
+      steps:[['Share your study plans','Discuss your destination, institution, course start date and admission stage.'],['Map the documents','Identify the official student pathway and required academic and financial evidence.'],['Get application-ready','Review the forms, supporting documents and any appointment requirements.'],['Plan the transition','Prepare for decisions, travel arrangements and compliance with student conditions.']],
+      faqs:[
+        ['Do I need an offer letter before applying?','Many student visa categories require an admission or enrollment document from an eligible institution. The exact format depends on the destination.'],
+        ['Can family members travel with students?','Some visa categories permit eligible dependents, while others restrict them. This must be checked for your destination and course.'],
+        ['Can a student visa holder work?','Work rights differ by country, visa type and course. Never assume that student status includes unrestricted work permission.']
+      ],
+      note:'Institution admission, scholarships, student visa approval and work rights are separate questions. Each is governed by its own requirements.'
+    },
+    work: {
+      number:'03', title:'Work Visa', label:'GROW YOUR CAREER', short:'Navigate your next professional chapter.',
+      icon:'work', class:'work', url:'work-visa.html',
+      heroTitle:'Professional opportunities deserve careful preparation.',
+      heroText:'Work authorization often involves both the applicant and an employer. We help clarify the steps, identify essential records and prepare for a suitable work visa pathway.',
+      intro:'Work visa processes can be employer-sponsored or based on other eligibility categories, depending on the country. A clear view of the relevant requirements matters.',
+      ideal:['Candidates with a genuine job offer','Professionals considering employer sponsorship','Applicants gathering experience and qualification records','Workers preparing for authorization or permit steps'],
+      help:[
+        ['Identify the suitable route','Explore the available work authorization category and basic eligibility conditions.'],
+        ['Understand sponsorship','Clarify whether employer authorization, sponsorship or a confirmed role is needed.'],
+        ['Organize employment records','Prepare contracts, employer letters and other documents where applicable.'],
+        ['Present your qualifications','Gather educational, professional and experience evidence requested by authorities.'],
+        ['Prepare practical steps','Understand the official forms, medical checks, police checks or appointment stages.'],
+        ['Know the conditions','Review duration, employer restrictions, dependents and renewal considerations.']
+      ],
+      docs:[
+        ['Passport and identification','Valid travel and identity documentation.'],
+        ['Employment evidence','Genuine job offer, contract or employer letter where required.'],
+        ['Employer documents','Sponsorship, work authorization or employer registration materials, if needed.'],
+        ['Qualifications','Certificates, licenses, credentials and attestations where applicable.'],
+        ['Experience history','CV, previous employment references and relevant evidence.'],
+        ['Regulatory checks','Police, medical, language or other background documents if required.']
+      ],
+      steps:[['Discuss your career plans','Review the destination, the proposed role and any existing employer offer.'],['Check eligibility and sponsorship','Identify the immigration route and what your employer may need to provide.'],['Assemble the documents','Prepare personal, professional and employer-related supporting material.'],['Follow official procedures','Understand submission steps, decisions and work authorization conditions.']],
+      faqs:[
+        ['Do I need an employer to sponsor me?','Many work visa types require employer involvement or sponsorship, but some countries offer other routes. Eligibility depends on the exact category.'],
+        ['Does a work visa service include a job offer?','No job offer, job placement or employer sponsorship is promised by this website. Work visa guidance is different from recruitment.'],
+        ['Can I start working while my application is pending?','Do not assume so. Employment may begin only when legally permitted under the relevant country’s rules and your authorization status.']
+      ],
+      note:'A work visa is not a guarantee of employment. Do not pay anyone promising a guaranteed job, sponsor or visa decision without independent verification.'
+    }
+  };
+
+  const homeFaqs = [
+    ['Which visa service should I choose?','It depends on the main purpose of your travel. Tourist visas typically cover holidays or sightseeing, student visas support qualifying study and work visas relate to authorized employment. We can help you identify the starting point.'],
+    ['What documents will I need?','Requirements depend on nationality, destination, visa category and personal circumstances. Each service page provides a useful starting checklist, but the official checklist always takes priority.'],
+    ['How long does the visa process take?','Timelines vary and can change without notice. Application volumes, appointments, background checks and government decisions all affect processing times.'],
+    ['Can you guarantee my visa approval?','No. Only the relevant authorities can decide whether a visa is issued. We focus on preparation, clarity and guidance rather than promising outcomes.'],
+    ['Do you provide services for every country?','Availability and requirements depend on the destination and the applicant’s profile. Please share your intended country when making an inquiry so the relevant route can be discussed.'],
+    ['How can I contact SENCHI GLOBAL LLC?','Use the inquiry builder below to prepare your request. A verified business email, phone number and social links can be added to the site when available.']
+  ];
+
+  function brand(footer = false) {
+    return `<a class="brand ${footer ? 'brand--footer' : ''}" href="index.html" aria-label="SENCHI GLOBAL LLC — home">
+      <span class="brand__logo-wrap">
+        <img class="brand__mark brand__mark--default" src="assets/logo-before-scroll.png" width="56" height="56" alt="SENCHI GLOBAL LLC logo" loading="eager" decoding="sync">
+        ${footer ? '' : '<img class="brand__mark brand__mark--scrolled" src="assets/logo-after-scroll.png" width="56" height="56" alt="" aria-hidden="true" loading="eager" decoding="sync">'}
+      </span>
+      <span class="brand__type"><strong>SENCHI <span>GLOBAL</span></strong><small>LLC · VISA GUIDANCE</small></span>
+    </a>`;
+  }
+
+  function header() {
+    return `<div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+      <header class="site-header" id="site-header"><div class="container nav-shell">
+      ${brand()}
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a class="${page === 'home' ? 'is-current' : ''}" href="index.html">Home</a>
+        <a href="index.html#about">About us</a>
+        <div class="nav-menu"><button type="button" class="nav-menu__trigger" aria-haspopup="true" aria-expanded="false">Our services ${icon('chevron',14)}</button>
+          <div class="nav-menu__panel">${Object.values(services).map(s => `<a href="${s.url}"><span class="nav-menu__icon ${s.class}">${icon(s.icon,19)}</span><span><strong>${s.title}</strong><small>${s.short}</small></span>${icon('arrowUp',14)}</a>`).join('')}</div>
+        </div>
+        <a href="index.html#process">Our process</a>
+        <a href="index.html#faq">FAQs</a>
+      </nav>
+      <a class="btn btn--nav" href="index.html#contact">Get in touch ${icon('arrowUp',17)}</a>
+      <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-navigation">${icon('menu',24)}</button>
+    </div></header>
+    <nav class="mobile-nav" id="mobile-navigation" aria-label="Mobile navigation" hidden>
+      <a href="index.html">Home</a><a href="index.html#about">About us</a><span class="mobile-nav__heading">Visa services</span>
+      ${Object.values(services).map(s=>`<a class="mobile-nav__service" href="${s.url}">${icon(s.icon,19)} ${s.title}</a>`).join('')}
+      <a href="index.html#process">Our process</a><a href="index.html#faq">FAQs</a><a href="index.html#contact">Get in touch ${icon('arrowUp',16)}</a>
+    </nav>`;
+  }
+
+  // Official accounts are only clickable once an actual verified URL is added in site-config.js.
+  function socials() {
+    const accounts = [
+      ['instagram', 'Instagram'],
+      ['facebook', 'Facebook'],
+      ['whatsapp', 'WhatsApp'],
+      ['linkedin', 'LinkedIn'],
+      ['tiktok', 'TikTok'],
+      ['youtube', 'YouTube']
+    ];
+    return `<div class="branch-social-icons" aria-label="Social media profiles">
+      ${accounts.map(([key, label], index) => {
+        const url = (config.social || {})[key] || (key === 'whatsapp' && config.whatsappNumber ? `https://wa.me/${String(config.whatsappNumber).replace(/\D/g, '')}` : '');
+        const active = typeof url === 'string' && /^https:\/\//i.test(url.trim());
+        return active
+          ? `<a class="branch-social-icon branch-social-icon--${key}" style="--float-delay:${index * 0.22}s" href="${esc(url.trim())}" target="_blank" rel="noopener noreferrer" aria-label="${key === 'whatsapp' ? 'Chat with SENCHI GLOBAL on WhatsApp' : `Visit our ${label} profile`}" title="${label}">${socialLogo(key, label)}</a>`
+          : '';
+      }).join('')}
+    </div>`;
+  }
+
+  function footer() {
+    const email = config.email ? `<a href="mailto:${encodeURIComponent(config.email)}">${esc(config.email)}</a>` : '';
+    const phone = config.phoneDial && config.phoneDisplay ? `<a href="tel:${esc(config.phoneDial)}">${esc(config.phoneDisplay)}</a>` : '';
+    // Keep office details available even if the optional config file fails to load.
+    const branch = {
+      label: 'Sharjah Branch',
+      officeName: 'SENCHI Global.LLC',
+      address: 'Office No. 204, 2nd Floor, C Block, Dubai Islamic Bank Building, Al Qasimia, Al Nad, Sharjah, UAE',
+      ...(config.branch || {})
+    };
+    // Opens a Google Maps address search; this is not a claim of an independently verified map pin.
+    const mapSearch = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${branch.officeName}, ${branch.address}`)}`;
+    return `<footer class="site-footer"><div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">${brand(true)}<p>Your next chapter deserves a thoughtful start. Explore the opportunities ahead with clarity and confidence.</p></div>
+        <div class="footer-column"><h3>Explore</h3><a href="index.html#about">About us</a><a href="index.html#process">Our approach</a><a href="index.html#faq">Frequently asked questions</a><a href="index.html#contact">Contact</a></div>
+        <div class="footer-column"><h3>Our services</h3>${Object.values(services).map(s=>`<a href="${s.url}">${s.title}</a>`).join('')}</div>
+        <div class="footer-column"><h3>Connect</h3><p>We'd love to hear what you're planning.</p>${email}${phone}${config.officeAddress ? `<p>${esc(config.officeAddress)}</p>` : ''}<a class="footer-inquiry" href="index.html#contact">Start an inquiry ${icon('arrowUp',15)}</a></div>
+      </div>
+      <div class="footer-office-social" aria-label="Sharjah branch and social media">
+        <div class="footer-office-social__location">
+          <span class="footer-office-social__pin">${icon('pin',19)}</span>
+          <div class="footer-office-social__details">
+            <span class="footer-office-social__eyebrow">${esc(branch.label)}</span>
+            <strong>${esc(branch.officeName)}</strong>
+            <address>${esc(branch.address)}</address>
+          </div>
+          <a class="footer-office-social__map" href="${mapSearch}" target="_blank" rel="noopener noreferrer" aria-label="Search the Sharjah branch address on Google Maps">Map ${icon('arrowUp',15)}</a>
+        </div>
+        <div class="footer-office-social__follow">
+          <span class="footer-office-social__follow-heading">Stay connected</span>
+          ${socials()}
+          ${Object.values(config.social || {}).some(u => typeof u === 'string' && /^https:\/\//i.test(u.trim())) ? '' : '<small>Official social links coming soon</small>'}
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© ${new Date().getFullYear()} ${esc(config.companyName || 'SENCHI GLOBAL LLC')}. All rights reserved.</span><span><a href="privacy.html">Privacy &amp; disclaimer</a> <i aria-hidden="true"></i> Visa decisions are made by the relevant authorities.</span></div>
+    </div></footer>`;
+  }
+
+  function sectionHeading(eyebrow, title, text = '', align = '') {
+    return `<div class="section-heading ${align}"><span class="eyebrow">${icon('sparkle',14)} ${eyebrow}</span><h2>${title}</h2>${text ? `<p>${text}</p>` : ''}</div>`;
+  }
+
+  function serviceCard(s) {
+    const chip = {tourist:'EXPLORE MORE',student:'STUDY ABROAD',work:'GLOBAL CAREERS'}[s.class];
+    const descriptions = {
+      tourist: 'Travel destinations and famous landmarks',
+      student: 'Students walking toward a university campus',
+      work: 'International traveler in an airport terminal'
+    };
+    return `<article class="service-card service-card--${s.class} reveal">
+      <div class="service-card__visual">
+        <img class="service-card__photo" src="assets/${s.class}-visa.jpg" alt="${descriptions[s.class]}" loading="lazy" decoding="async">
+        <span class="service-card__counter">${s.number} / 03</span>
+        <span class="service-card__chip">${chip}</span>
+      </div>
+      <div class="service-card__body"><h3>${s.title}</h3><p>${s.short}</p>
+        <span class="service-card__line"></span><a class="text-link" href="${s.url}">Explore the service <span>${icon('arrowUp',18)}</span></a></div>
+    </article>`;
+  }
+
+  function faqMarkup(items, prefix = 'faq') {
+    return `<div class="faq-list" data-accordion="${prefix}">${items.map(([q,a],i) => `<div class="faq-item ${i === 0 ? 'is-open' : ''}">
+      <h3><button type="button" class="faq-question" id="${prefix}-q${i}" aria-expanded="${i === 0 ? 'true' : 'false'}" aria-controls="${prefix}-a${i}"><span>${esc(q)}</span><span class="faq-toggle">${icon('plus',19)}</span></button></h3>
+      <div class="faq-answer" id="${prefix}-a${i}" role="region" aria-labelledby="${prefix}-q${i}" ${i === 0 ? '' : 'hidden'}><p>${esc(a)}</p></div>
+    </div>`).join('')}</div>`;
+  }
+
+  function contactSection() {
+    const canSend = Boolean(String(config.web3formsAccessKey || '').trim());
+    return `<section class="section contact-section" id="contact"><div class="container"><div class="contact-layout">
+      <div class="contact-copy reveal"><span class="eyebrow">${icon('sparkle',14)} LET'S MAKE A PLAN</span><h2>Your next chapter<br><em>starts here.</em></h2><p>Tell us a little about your plans. A clear question is often the first step toward a confident decision.</p>
+        <div class="contact-mini"><div class="contact-mini__icon">${icon('chat',22)}</div><div><strong>Start the conversation</strong><span>Travel, study, or work — tell us what you're exploring.</span></div></div>
+        <div class="contact-mini"><div class="contact-mini__icon">${icon('shield',22)}</div><div><strong>Clear guidance, realistic expectations</strong><span>No promises of a visa decision or guaranteed timelines.</span></div></div>
+        ${config.email ? `<a class="contact-direct" href="mailto:${encodeURIComponent(config.email)}">${icon('mail',18)} ${esc(config.email)}</a>` : ''}
+        ${config.phoneDial && config.phoneDisplay ? `<a class="contact-direct" href="tel:${esc(config.phoneDial)}">${icon('phone',18)} ${esc(config.phoneDisplay)}</a>` : ''}
+        ${config.whatsappNumber ? `<a class="contact-direct" href="https://wa.me/${esc(config.whatsappNumber)}" target="_blank" rel="noopener noreferrer">${icon('chat',18)} Chat on WhatsApp</a>` : ''}
+      </div>
+      <div class="contact-form-wrap glass reveal"><div class="form-top"><span>YOUR INQUIRY</span><span class="form-dot"><i></i> BEGIN HERE</span></div>
+        <h3>How can we help you?</h3><p class="form-intro">Share a few details with the SENCHI GLOBAL LLC team. Required fields are marked with an asterisk.</p>
+        <form id="inquiry-form" novalidate>
+          <div class="form-row"><label><span class="field-label">Full name <b>*</b></span><input name="name" type="text" required maxlength="100" autocomplete="name" placeholder="Your full name"></label><label><span class="field-label">Email address <b>*</b></span><input name="email" type="email" required maxlength="160" autocomplete="email" placeholder="you@example.com"></label></div>
+          <label class="contact-phone-label"><span class="field-label">Contact number <b>*</b></span><input name="phone" type="tel" required autocomplete="tel" inputmode="tel" maxlength="28" aria-describedby="phone-help" placeholder="+971 50 123 4567"><small class="phone-help" id="phone-help">Required. Include your country code, if possible.</small></label>
+          <div class="form-row"><label><span class="field-label">I'm interested in <b>*</b></span><select name="service" required><option value="" disabled selected>Select a visa service</option><option value="Tourist visa">Tourist visa</option><option value="Student visa">Student visa</option><option value="Work visa">Work visa</option><option value="Residence visa">Residence visa</option></select></label><label><span class="field-label">Destination <b>*</b></span><input name="destination" type="text" required maxlength="100" placeholder="Country / destination" autocomplete="off"></label></div>
+          <label><span class="field-label">Tell us about your plans (optional)</span><textarea name="message" maxlength="1500" rows="4" placeholder="Any extra details or questions you'd like to share? (optional)"></textarea></label>
+          <label class="inquiry-honeypot" aria-hidden="true">Leave this field empty <input name="website" type="text" autocomplete="off" tabindex="-1"></label>
+          <button class="btn btn--primary btn--form" type="submit">${canSend ? 'Send inquiry' : 'Prepare my inquiry'} ${icon('arrowUp',18)}</button>
+          <p class="form-note">${icon('shield',14)} ${canSend ? 'This form sends your inquiry securely through Web3Forms. Please do not enter passport numbers or attach documents.' : 'This form is waiting for the site owner to connect the email service. Until then it prepares a copyable draft.'}</p>
+          <p class="inquiry-feedback" id="inquiry-feedback" role="alert" hidden></p>
+        </form>
+        <div id="inquiry-result" class="inquiry-result" hidden role="status" aria-live="polite"><strong id="inquiry-result-title">Inquiry prepared</strong><p id="inquiry-result-message">Your draft is ready to copy. This has not been sent to the company.</p><pre id="inquiry-preview"></pre><button type="button" class="btn btn--secondary" id="copy-inquiry">${icon('copy',16)} Copy inquiry</button><span id="copy-feedback" aria-live="polite"></span></div>
+      </div>
+    </div></div></section>`;
+  }
+
+  function homePage() {
+    return `${header()}<main id="main">
+      <section class="hero" id="home"><div class="hero__wash"></div><div class="container hero__grid">
+        <div class="hero__copy reveal"><span class="hero__eyebrow"><span class="hero__eyebrow-dot"></span> YOUR JOURNEY. OUR FOCUS. <span class="hero__eyebrow-line"></span></span>
+          <h1>Beyond borders.<br><span class="word-emphasis">Beyond ordinary.</span><br><span class="hero__underline">Your journey starts here.</span></h1>
+          <p class="hero__description">Travel for discovery, study for your future, or pursue work opportunities abroad. Explore your next chapter with SENCHI GLOBAL LLC.</p>
+          <div class="hero__actions"><a class="btn btn--primary" href="#services">Explore our services ${icon('arrowUp',18)}</a><a class="btn btn--ghost" href="#contact">Let's talk ${icon('arrow',18)}</a></div>
+          <div class="hero__reassurance"><div class="hero__reassurance-icon">${icon('compass',24)}</div><div><strong>Three paths. Countless possibilities.</strong><span>Tourist visa <b>·</b> Student visa <b>·</b> Work visa</span></div></div>
+        </div>
+        <div class="hero__art" aria-label="Decorative animated three-dimensional globe" role="img">
+          <div class="orbit-aura"></div><canvas id="globe-canvas" aria-hidden="true"></canvas>
+          <div class="floating-note floating-note--top"><span class="floating-note__icon">${icon('plane',19)}</span><span><small>DISCOVER</small><strong>New horizons</strong></span></div>
+          <div class="floating-note floating-note--mid"><span class="floating-note__icon floating-note__icon--gold">${icon('study',19)}</span><span><small>LEARN</small><strong>Beyond borders</strong></span></div>
+          <div class="floating-note floating-note--bottom"><span class="floating-note__icon">${icon('work',19)}</span><span><small>GROW</small><strong>Your next chapter</strong></span></div>
+          <span class="globe-hint">${icon('compass',14)} DRAG TO EXPLORE</span>
+        </div>
+      </div><div class="hero-bottom"><div class="container hero-bottom__inner"><span>VISAS MADE MORE UNDERSTANDABLE</span><span class="hero-bottom__scroll">SCROLL TO EXPLORE <i></i></span><span>THE NEXT CHAPTER STARTS HERE</span></div></div></section>
+
+      <section class="section services-section" id="services"><div class="container">
+        <div class="services-header">${sectionHeading('WHAT WE DO','The right guidance for <em>your journey.</em>','From a first holiday abroad to a life-changing academic or career opportunity, start with a service shaped around your goals.')}<span class="services-count">01 — 03<br><small>OUR SERVICES</small></span></div>
+        <div class="service-grid">${Object.values(services).map(serviceCard).join('')}</div>
+        <div class="services-footnote">${icon('shield',17)} Every destination and visa category has its own rules. We help you understand the steps — official authorities make the final decisions.</div>
+      </div></section>
+
+      <section class="section route-section" id="visa-guide"><div class="container">
+        <div class="route-head">${sectionHeading('YOUR TRAVEL PATHWAY','One destination. <em>Many possibilities.</em>','Inspired by modern travel experiences: choose a pathway to preview its key preparations. Every route depends on the official rules of your destination.')}<div class="route-head__stamp">${icon('compass',22)} EXPLORE YOUR OPTIONS</div></div>
+        <div class="route-shell glass reveal">
+          <div class="route-shell__menu" role="tablist" aria-label="Visa pathway selector">
+            ${Object.values(services).map((service,i)=>`<button class="route-tab ${i===0?'is-active':''}" role="tab" id="route-tab-${service.class}" aria-controls="route-panel-${service.class}" aria-selected="${i===0?'true':'false'}" tabindex="${i===0?'0':'-1'}" data-route="${service.class}">${icon(service.icon,22)}<span>${service.title}<small>${service.label.toLowerCase()}</small></span>${icon('arrow',17)}</button>`).join('')}
+          </div>
+          <div class="route-shell__content">
+            ${Object.values(services).map((service,i)=>`<div class="route-panel" id="route-panel-${service.class}" role="tabpanel" aria-labelledby="route-tab-${service.class}" ${i===0?'':'hidden'}><div class="route-panel__kicker">THE ${service.title.toUpperCase()} PATHWAY <span>0${i+1} / 03</span></div><div class="route-panel__grid"><div><h3>${service.heroTitle}</h3><p>${service.heroText}</p><a class="btn btn--primary" href="${whatsappGuidanceUrl(service.title) || service.url}" ${whatsappGuidanceUrl(service.title) ? 'target="_blank" rel="noopener noreferrer"' : ''} aria-label="${whatsappGuidanceUrl(service.title) ? `Ask about ${service.title} guidance on WhatsApp` : `Read ${service.title} guidance`}">View detailed guidance ${icon(whatsappGuidanceUrl(service.title) ? 'whatsapp' : 'arrowUp',18)}</a></div><div class="route-docs"><span class="route-docs__heading">DOCUMENTS TO START WITH</span>${service.docs.slice(0,4).map(([heading],idx)=>`<div>${icon('circleCheck',17)}<span>${esc(heading)}</span><small>0${idx+1}</small></div>`).join('')}<p>Requirements vary by country and applicant.</p></div></div></div>`).join('')}
+          </div>
+        </div>
+      </div></section>
+
+      <section class="section about-section" id="about"><div class="container about-grid">
+        <div class="about-visual reveal"><div class="about-visual__outer"><div class="about-visual__orbit"></div><div class="about-visual__center">${icon('compass',80)}</div><span class="about-visual__star star-a">✦</span><span class="about-visual__star star-b">✦</span></div>
+          <div class="about-quote glass"><span class="quote-mark">“</span><p>Every new chapter begins with the courage to explore.</p><span class="about-quote__by">SENCHI GLOBAL LLC</span></div>
+          <div class="about-tag glass">${icon('check',17)} PURPOSE-LED GUIDANCE</div>
+        </div>
+        <div class="about-copy reveal"><span class="eyebrow">${icon('sparkle',14)} A LITTLE ABOUT US</span><h2>Big dreams need<br><em>clear direction.</em></h2><p>Visa planning can feel complicated. Our approach is to make the process easier to understand, with thoughtful guidance, practical checklists, and a focus on what matters to your situation.</p><p>At SENCHI GLOBAL LLC, we believe preparation should feel supportive, transparent, and personal — whatever your next destination may be.</p>
+          <div class="about-values"><div>${icon('document',21)}<span><strong>Document clarity</strong><small>Know what to prepare</small></span></div><div>${icon('compass',21)}<span><strong>Thoughtful planning</strong><small>Understand your options</small></span></div><div>${icon('chat',21)}<span><strong>Clear communication</strong><small>Stay informed as you go</small></span></div><div>${icon('shield',21)}<span><strong>Honest expectations</strong><small>No promises of approval</small></span></div></div>
+          <a class="text-link text-link--wide whatsapp-cta-link" href="${whatsappContactUrl('Hello SENCHI GLOBAL LLC, I would like to tell you about my travel and visa plans.')}" target="_blank" rel="noopener noreferrer" aria-label="Tell SENCHI GLOBAL about your travel plans on WhatsApp">Tell us about your plans <span class="whatsapp-cta-icon">${whatsappCTALogo()}</span></a>
+        </div>
+      </div></section>
+
+      <section class="section journey-section" id="inspiration"><div class="container">
+       <div class="journey-head">${sectionHeading('THE WORLD AWAITS','Choose your <em>next chapter.</em>','Different goals, different journeys. The right starting point is the path that matches your plans.')}<a class="text-link" href="#visa-guide">Compare pathways <span>${icon('arrowUp',18)}</span></a></div>
+       <div class="journey-gallery" aria-label="Explore visa journeys">
+        <a class="journey-tile journey-tile--tourist reveal" href="tourist-visa.html"><span class="journey-tile__index">01 / DISCOVER</span><div class="journey-tile__scene"><span class="journey-tile__sun"></span><span class="journey-tile__hill hill-one"></span><span class="journey-tile__hill hill-two"></span><span class="journey-tile__skyline"></span></div><span class="journey-tile__copy"><small>THE ADVENTURE</small><strong>See the world.</strong><span>Tourist visa ${icon('arrowUp',17)}</span></span></a>
+        <a class="journey-tile journey-tile--student reveal" href="student-visa.html"><span class="journey-tile__index">02 / LEARN</span><div class="journey-tile__scene"><span class="journey-tile__sun"></span><span class="journey-tile__hill hill-one"></span><span class="journey-tile__hill hill-two"></span><span class="journey-tile__skyline"></span></div><span class="journey-tile__copy"><small>THE OPPORTUNITY</small><strong>Study without borders.</strong><span>Student visa ${icon('arrowUp',17)}</span></span></a>
+        <a class="journey-tile journey-tile--work reveal" href="work-visa.html"><span class="journey-tile__index">03 / GROW</span><div class="journey-tile__scene"><span class="journey-tile__sun"></span><span class="journey-tile__hill hill-one"></span><span class="journey-tile__hill hill-two"></span><span class="journey-tile__skyline"></span></div><span class="journey-tile__copy"><small>THE AMBITION</small><strong>Go further in your career.</strong><span>Work visa ${icon('arrowUp',17)}</span></span></a>
+       </div>
+       <p class="journey-disclaimer">Concept illustrations are for inspiration only. They do not represent confirmed destinations or available visas.</p>
+      </div></section>
+
+      <section class="section process-section" id="process"><div class="container">
+        ${sectionHeading('HOW IT WORKS','A clearer path, <em>step by step.</em>','Good preparation starts with understanding the journey. Here is the simple way we approach your next move.','section-heading--center')}
+        <div class="process-grid" aria-label="Our four-step visa guidance process">
+        ${[
+          ['01','DISCOVER','Tell us your goal','Start with a conversation about the journey you want to make. We listen first, then help you organize your priorities.','processTalk',[
+            'Choose your visa interest and destination',
+            'Share your travel, study or career goals',
+            'Tell us your timeline and key questions'
+          ],'A clear starting point'],
+          ['02','PLAN','Understand the route','We help you understand the likely pathway and what to verify for your destination and circumstances.','processMap',[
+            'Identify the relevant visa category',
+            'Review official requirements and eligibility',
+            'Build a personalized document checklist'
+          ],'A practical preparation roadmap'],
+          ['03','PREPARE','Prepare with care','Bring your documents together with a more organized, confident approach to each application stage.','processList',[
+            'Organize forms and identity documents',
+            'Review financial or supporting evidence',
+            'Understand appointments and biometrics'
+          ],'A more organized application file'],
+          ['04','PROGRESS','Apply to the dream','Know which official steps come next and what to watch for after preparing your application.','processLaunch',[
+            'Follow the official submission process',
+            'Watch for updates or document requests',
+            'Understand decisions and travel conditions'
+          ],'Confidence about the next steps']
+        ].map(([num,tag,title,description,glyph,points,outcome])=>`
+          <article class="process-card process-card--${num} reveal">
+            <div class="process-card__top"><span class="process-card__number">${num}</span><span class="process-card__tag">${tag}</span></div>
+            <div class="process-card__icon" aria-hidden="true"><span class="process-card__halo"></span>${icon(glyph,38,'process-icon-svg')}<span class="process-card__twinkle">✦</span></div>
+            <h3>${title}</h3>
+            <p class="process-card__description">${description}</p>
+            <div class="process-card__list-label">WHAT WE COVER</div>
+            <ul class="process-card__list">${points.map(point=>`<li>${icon('check',14)}<span>${point}</span></li>`).join('')}</ul>
+            <div class="process-card__outcome"><span>YOUR TAKEAWAY</span><strong>${outcome}</strong></div>
+          </article>`).join('')}
+        </div>
+        <div class="process-section__note reveal"><span>${icon('shield',20)} Visa decisions are made by official authorities. Requirements and timelines vary by destination.</span><a class="whatsapp-cta-link whatsapp-cta-process" href="${whatsappContactUrl('Hello SENCHI GLOBAL LLC, I would like to start a visa inquiry.')}" target="_blank" rel="noopener noreferrer" aria-label="Start your visa inquiry on WhatsApp">Start your inquiry ${whatsappCTALogo()}</a></div>
+      </div></section>
+
+      <section class="section faq-section" id="faq"><div class="container faq-grid"><div class="faq-copy reveal"><span class="eyebrow">${icon('sparkle',14)} GOOD TO KNOW</span><h2>Questions worth<br><em>asking.</em></h2><p>Clear information makes all the difference. Here are a few useful answers as you get started.</p><a class="text-link" href="#contact">Have a different question? <span>${icon('arrowUp',18)}</span></a></div><div class="reveal">${faqMarkup(homeFaqs)}</div></div></section>
+      ${contactSection()}
+    </main>${footer()}`;
+  }
+
+  function detailsPage(s) {
+    const other = Object.values(services).filter(item=>item.class!==s.class);
+    return `${header()}<main id="main">
+      <section class="detail-hero detail-hero--${s.class}"><div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a>${icon('chevron',14)}<a href="index.html#services">Services</a>${icon('chevron',14)}<span>${s.title}</span></nav>
+        <div class="detail-hero__grid"><div class="detail-hero__copy reveal"><span class="eyebrow">${icon('sparkle',14)} ${s.label}</span><h1>${s.heroTitle}</h1><p>${s.heroText}</p><div class="detail-hero__actions"><a class="btn btn--primary" href="${ctaLink(s.class)}">Start an inquiry ${icon('arrowUp',18)}</a><a class="btn btn--ghost" href="#what-we-help-with">What we help with ${icon('arrow',18)}</a></div></div>
+          <div class="detail-hero__art detail-hero__art--photo reveal">
+            <div class="detail-hero__photo-frame">
+              <img class="detail-hero__photo" src="assets/detail-${s.class}.jpg" alt="${esc({tourist:'Tourism and visa travel illustration with a passport and airplane',student:'Students preparing to study abroad with books and travel documents',work:'Professional visa consultation in an office overlooking Dubai'}[s.class])}" width="736" height="1000" loading="eager" decoding="async" fetchpriority="high">
+            </div>
+            <span class="detail-hero__badge glass">${icon('check',18)} MADE FOR YOUR NEXT STEP</span>
+          </div></div>
+      </div></section>
+      <section class="section detail-intro"><div class="container detail-intro__grid"><div>${sectionHeading('THE BIG PICTURE',`Your journey, <em>thoughtfully planned.</em>`)}</div><div><p>${s.intro}</p><h3>Who this service can help</h3><div class="ideal-list">${s.ideal.map(t=>`<div>${icon('circleCheck',19)}<span>${esc(t)}</span></div>`).join('')}</div></div></div></section>
+      <section class="section help-section" id="what-we-help-with"><div class="container">${sectionHeading('SUPPORT ALONG THE WAY','What we can <em>help you understand.</em>','The exact pathway will depend on official rules and your circumstances. These are the core areas we can help you prepare for.')}
+        <div class="help-grid">${s.help.map(([h,d],i)=>`<article class="help-card glass reveal"><span class="help-card__number">0${i+1}</span><div class="help-card__icon">${icon(['compass','document','shield','check','clock','sparkle'][i],24)}</div><h3>${esc(h)}</h3><p>${esc(d)}</p></article>`).join('')}</div>
+      </div></section>
+      <section class="section documents-section"><div class="container documents-grid"><div class="documents-copy reveal"><span class="eyebrow">${icon('sparkle',14)} BE PREPARED</span><h2>A useful starting <em>checklist.</em></h2><p>Documents are not the same for every applicant. Use these common examples as an orientation — always follow the checklist from the relevant authority.</p><div class="documents-note">${icon('shield',22)}<span><strong>Important to remember</strong> ${esc(s.note)}</span></div></div>
+        <div class="documents-list glass reveal">${s.docs.map(([h,d],i)=>`<div class="document-item"><span class="document-item__icon">${icon('document',20)}</span><span><strong>${esc(h)}</strong><small>${esc(d)}</small></span><span class="document-item__count">0${i+1}</span></div>`).join('')}</div>
+      </div></section>
+      <section class="section timeline-section"><div class="container">${sectionHeading('FROM START TO NEXT STEP','Your journey in <em>four stages.</em>','','section-heading--center')}<div class="timeline-grid">${s.steps.map(([h,d],i)=>`<div class="timeline-step reveal"><span>0${i+1}</span><div class="timeline-step__dot"></div><h3>${esc(h)}</h3><p>${esc(d)}</p></div>`).join('')}</div></div></section>
+      <section class="section faq-section detail-faq"><div class="container faq-grid"><div class="faq-copy reveal"><span class="eyebrow">${icon('sparkle',14)} ${s.title.toUpperCase()} FAQ</span><h2>Answers for<br><em>your next step.</em></h2><p>Have more questions about your circumstances? Prepare a personal inquiry and share your plans.</p><a class="text-link" href="${ctaLink(s.class)}">Ask us a question <span>${icon('arrowUp',18)}</span></a></div><div class="reveal">${faqMarkup(s.faqs,`${s.class}-faq`)}</div></div></section>
+      <section class="service-cta-section"><div class="container"><div class="service-cta glass"><div><span class="eyebrow">${icon('sparkle',14)} THE NEXT STEP IS YOURS</span><h2>Ready to explore your <em>${s.title.toLowerCase()}</em> options?</h2><p>Share your plans and start with a clearer understanding of the journey ahead.</p></div><a class="btn btn--primary" href="${ctaLink(s.class)}">Prepare an inquiry ${icon('arrowUp',18)}</a></div></div></section>
+      <section class="related-section"><div class="container"><h2>Other paths you can explore</h2><div class="related-grid">${other.map(item=>`<a class="related-card" href="${item.url}"><span class="related-card__icon">${icon(item.icon,25)}</span><span><strong>${item.title}</strong><small>${item.short}</small></span>${icon('arrowUp',20)}</a>`).join('')}</div></div></section>
+    </main>${footer()}`;
+  }
+
+  function privacyPage() {
+    return `${header()}<main id="main"><section class="legal-hero"><div class="container"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a>${icon('chevron',14)}<span>Privacy &amp; disclaimer</span></nav><span class="eyebrow">${icon('shield',15)} TRANSPARENCY MATTERS</span><h1>Privacy &amp; disclaimer</h1><p>A plain-language overview of how this website works and the important limits of visa guidance.</p></div></section>
+      <section class="section legal-section"><div class="container legal-content glass"><h2>Website inquiry form</h2><p>When a Web3Forms access key has been configured, submitting the inquiry sends your name, email address, phone number, selected visa service, destination, and any optional plans to Web3Forms, a third-party service that forwards the information to the company’s verified receiving email address. The form does not require SENCHI GLOBAL LLC to operate its own server. Web3Forms may process and retain these submissions under its privacy and retention terms. Do not include passport numbers, identity documents, financial records or other sensitive materials. The company should publish a reviewed privacy notice describing its data handling and retention practices before accepting live inquiries. If the delivery service is not configured, the website only prepares a copyable draft and does not transmit it.</p><h2>Contact details and social links</h2><p>Verified contact information and official social accounts are not included in the initial version. They can be added later using the website's configuration file. Links are hidden until populated.</p><h2>General informational guidance</h2><p>Content on this website is general information, not legal or immigration advice for an individual case. Visa rules, fees, eligibility, evidence, processing times and permitted activities change by destination and applicant circumstances. Always verify current information with the relevant government, embassy, consulate or authorized visa application center.</p><h2>No guarantee of approval</h2><p>SENCHI GLOBAL LLC cannot guarantee any visa, admission, job, sponsorship, travel permission or processing timeline. Immigration, educational and employment decisions are made by the relevant authorities, institutions and employers.</p><h2>Before publishing</h2><p>This starter page should be reviewed and replaced with a formal privacy notice and any other required legal information once actual contact methods, analytics tools, data-handling processes and applicable jurisdictions have been confirmed.</p><p class="legal-last"><a class="text-link" href="index.html">Back to the homepage ${icon('arrow',18)}</a></p></div></section></main>${footer()}`;
+  }
+
+  root.innerHTML = page === 'home' ? homePage() : services[page] ? detailsPage(services[page]) : privacyPage();
+
+  // Toggle the mobile navigation, keep expanded state in sync, and close after selection.
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileNav = document.getElementById('mobile-navigation');
+  if (menuButton && mobileNav) {
+    const setMenu = isOpen => {
+      mobileNav.hidden = !isOpen;
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      menuButton.innerHTML = icon(isOpen ? 'close':'menu', 24);
+      document.body.classList.toggle('menu-open', isOpen);
+    };
+    menuButton.addEventListener('click',()=>setMenu(mobileNav.hidden));
+    mobileNav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>setMenu(false)));
+    window.addEventListener('resize',()=>{if (window.innerWidth > 980 && !mobileNav.hidden) setMenu(false);},{passive:true});
+    document.addEventListener('keydown',event=>{if(event.key === 'Escape') setMenu(false);});
+  }
+
+  const dropdown = document.querySelector('.nav-menu');
+  const dropdownButton = dropdown?.querySelector('.nav-menu__trigger');
+  if (dropdown && dropdownButton) {
+    dropdownButton.addEventListener('click',()=>{
+      const active = dropdown.classList.toggle('menu-expanded');
+      dropdownButton.setAttribute('aria-expanded', String(active));
+    });
+    document.addEventListener('click',event=>{
+      if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('menu-expanded');
+        dropdownButton.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Accessible pathway switcher in the home-page guide.
+  const routeTabs = Array.from(document.querySelectorAll('[data-route]'));
+  const activateRoute = (tab, focus = false) => {
+    routeTabs.forEach(button => {
+      const selected = button === tab;
+      button.classList.toggle('is-active', selected);
+      button.setAttribute('aria-selected', String(selected));
+      button.tabIndex = selected ? 0 : -1;
+      const panel = document.getElementById('route-panel-' + button.dataset.route);
+      if (panel) panel.hidden = !selected;
+    });
+    if (focus) tab.focus();
+  };
+  routeTabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => activateRoute(tab));
+    tab.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp' && event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'Home' && event.key !== 'End') return;
+      event.preventDefault();
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? routeTabs.length - 1 : (i + (event.key === 'ArrowUp' || event.key === 'ArrowLeft' ? -1 : 1) + routeTabs.length) % routeTabs.length;
+      activateRoute(routeTabs[next], true);
+    });
+  });
+
+  // Accessible single-open accordion.
+  document.querySelectorAll('[data-accordion]').forEach(list => {
+    list.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click',()=>{
+        const selected = button.closest('.faq-item');
+        const opening = !selected.classList.contains('is-open');
+        list.querySelectorAll('.faq-item').forEach(item=>{
+          item.classList.remove('is-open');
+          item.querySelector('.faq-question').setAttribute('aria-expanded','false');
+          item.querySelector('.faq-answer').hidden = true;
+        });
+        if (opening) {
+          selected.classList.add('is-open');
+          button.setAttribute('aria-expanded','true');
+          selected.querySelector('.faq-answer').hidden = false;
+        }
+      });
+    });
+  });
+
+  const contactForm = document.getElementById('inquiry-form');
+  if (contactForm) {
+    const serviceParam = new URLSearchParams(window.location.search).get('service');
+    if (serviceParam && services[serviceParam]) contactForm.elements.service.value = services[serviceParam].title.replace('Visa', 'visa');
+    const phoneInput = contactForm.elements.phone;
+    const destinationInput = contactForm.elements.destination;
+    const feedback = document.getElementById('inquiry-feedback');
+    const result = document.getElementById('inquiry-result');
+    const resultTitle = document.getElementById('inquiry-result-title');
+    const resultMessage = document.getElementById('inquiry-result-message');
+    const inquiryPreview = document.getElementById('inquiry-preview');
+    const copyButton = document.getElementById('copy-inquiry');
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    // No self-hosted backend is needed. Web3Forms delivers submissions to
+    // the email verified for the public access key in js/site-config.js.
+    const formAccessKey = String(config.web3formsAccessKey || '').trim();
+    const formConfigured = Boolean(formAccessKey);
+
+    phoneInput?.addEventListener('input', () => phoneInput.setCustomValidity(''));
+    destinationInput?.addEventListener('input', () => destinationInput.setCustomValidity(''));
+
+    function showDraft(message, info) {
+      resultTitle.textContent = 'Inquiry prepared — not sent';
+      resultMessage.textContent = info || 'Copy this draft and send it to SENCHI GLOBAL LLC using a verified contact method.';
+      inquiryPreview.textContent = message;
+      inquiryPreview.hidden = false;
+      copyButton.hidden = false;
+      result.hidden = false;
+      result.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    function showFeedback(message) {
+      feedback.textContent = message;
+      feedback.hidden = !message;
+    }
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      showFeedback('');
+      result.hidden = true;
+      if (destinationInput) {
+        destinationInput.setCustomValidity(destinationInput.value.trim() ? '' : 'Please enter your destination country or location.');
+      }
+      if (phoneInput) {
+        const number = phoneInput.value.trim();
+        const digits = number.replace(/\D/g, '');
+        const allowedCharacters = /^\+?[0-9\s().-]+$/.test(number);
+        phoneInput.setCustomValidity(!number ? 'Please enter your contact number.' : !allowedCharacters || digits.length < 7 || digits.length > 15 ? 'Please enter a valid contact number with 7 to 15 digits.' : '');
+      }
+      if (!contactForm.reportValidity()) return;
+      const data = new FormData(contactForm);
+      const inquiry = {
+        name: String(data.get('name') || '').trim(),
+        email: String(data.get('email') || '').trim(),
+        phone: String(data.get('phone') || '').trim(),
+        service: String(data.get('service') || '').trim(),
+        destination: String(data.get('destination') || '').trim(),
+        message: String(data.get('message') || '').trim(),
+        website: String(data.get('website') || '').trim()
+      };
+      const message = [
+        'SENCHI GLOBAL LLC — Visa Service Inquiry', '',
+        `Name: ${inquiry.name}`, `Email: ${inquiry.email}`,
+        `Contact number: ${inquiry.phone}`, `Service: ${inquiry.service}`,
+        `Destination: ${inquiry.destination}`,
+        ...(inquiry.message ? ['', 'My plans / questions:', inquiry.message] : [])
+      ].join('\n');
+      // Honeypot is invisible to real visitors; avoid submitting bots.
+      if (inquiry.website) return;
+      if (!formConfigured) {
+        showDraft(message, 'Online inquiry delivery is not yet connected. Copy your message; it has NOT been sent. The site owner must add a Web3Forms access key.');
+        return;
+      }
+      submitButton.disabled = true;
+      submitButton.setAttribute('aria-busy','true');
+      const oldButtonHTML = submitButton.innerHTML;
+      submitButton.textContent = 'Sending inquiry...';
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 16000);
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+          body: JSON.stringify({
+            access_key: formAccessKey,
+            subject: `New SENCHI GLOBAL LLC inquiry — ${inquiry.service}`,
+            from_name: 'SENCHI GLOBAL Website',
+            name: inquiry.name,
+            email: inquiry.email,
+            phone: inquiry.phone,
+            visa_service: inquiry.service,
+            destination: inquiry.destination,
+            ...(inquiry.message ? {plans: inquiry.message} : {}),
+            botcheck: ''
+          }),
+          signal: controller.signal
+        });
+        let responseData = {};
+        try { responseData = await response.json(); } catch {}
+        if (!response.ok || responseData.success !== true) {
+          throw new Error(responseData.message || 'The form service could not accept this inquiry.');
+        }
+        resultTitle.textContent = 'Inquiry submitted successfully';
+        resultMessage.textContent = 'Thank you. Your inquiry was accepted for delivery to SENCHI GLOBAL LLC. Please check your email for any reply.';
+        inquiryPreview.hidden = true;
+        copyButton.hidden = true;
+        result.hidden = false;
+        contactForm.reset();
+        result.scrollIntoView({behavior:'smooth',block:'nearest'});
+      } catch (error) {
+        const explanation = error.name === 'AbortError' ? 'The request timed out. Please try again.' : error.message === 'Failed to fetch' ? 'Could not connect to the form delivery service. Check your internet connection.' : error.message;
+        showFeedback(`${explanation} Your inquiry has not been confirmed as sent.`);
+        showDraft(message,'The submission did not succeed. You can copy your information before trying again.');
+      } finally {
+        clearTimeout(timer);
+        submitButton.disabled = false;
+        submitButton.removeAttribute('aria-busy');
+        submitButton.innerHTML = oldButtonHTML;
+      }
+    });
+    copyButton?.addEventListener('click', async () => {
+      const text = inquiryPreview.textContent;
+      let copied = false;
+      try { await navigator.clipboard.writeText(text); copied = true; }
+      catch {
+        const field = document.createElement('textarea'); field.value = text; field.style.position = 'fixed'; field.style.opacity = '0';
+        document.body.appendChild(field); field.select(); copied = document.execCommand('copy'); field.remove();
+      }
+      document.getElementById('copy-feedback').textContent = copied ? 'Copied to clipboard.' : 'Select and copy the text above.';
+    });
+  }
+
+  // The two supplied company logos are built into the header; no fallback image switching.
+
+  // White header begins exactly when the first full section has moved off-screen.
+  // This is intentionally not a fixed pixel threshold: it adapts to screen sizes.
+  const progress = document.getElementById('reading-progress');
+  const siteHeader = document.getElementById('site-header');
+  const firstSection = document.querySelector('main > section');
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(()=>{
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (progress) progress.style.width = `${max > 0 ? (window.scrollY / max) * 100 : 0}%`;
+      const lightHeader = firstSection && siteHeader
+        ? firstSection.getBoundingClientRect().bottom <= 0
+        : window.scrollY > 80;
+      siteHeader?.classList.toggle('is-scrolled', Boolean(lightHeader));
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll, {passive:true});
+  // Initialize the color scheme right away, including on refresh or anchor loads.
+  if (firstSection && siteHeader) {
+    siteHeader.classList.toggle('is-scrolled',
+      firstSection.getBoundingClientRect().bottom <= 0);
+  }
+  onScroll();
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+    }),{threshold:.08,rootMargin:'0px 0px 30px 0px'});
+    document.querySelectorAll('.reveal').forEach(node=>observer.observe(node));
+  } else document.querySelectorAll('.reveal').forEach(node=>node.classList.add('is-visible'));
+
+  // Resolve same-page hashes after initial JavaScript-rendered content becomes available.
+  if (window.location.hash) {
+    requestAnimationFrame(()=>{
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (target) target.scrollIntoView({block:'start',behavior:'instant'});
+    });
+  }
+
+  // Pure canvas 3D globe. No image requests, WebGL dependency or third-party libraries.
+  const canvas = document.getElementById('globe-canvas');
+  if (canvas && canvas.getContext) initGlobe(canvas);
+
+  function initGlobe(canvas) {
+    const ctx = canvas.getContext('2d', {alpha:true});
+    if (!ctx) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let width=560,height=560,rotation=-0.55, tilt=-0.24, dragging=false,lastX=0,lastY=0,prevTime=0,visible=true;
+
+    const landPolygons = [
+      [[-168,72],[-140,72],[-128,59],[-125,48],[-116,32],[-110,28],[-98,15],[-88,15],[-84,25],[-80,28],[-68,45],[-55,48],[-53,58],[-75,60],[-92,72],[-110,73],[-139,69]],
+      [[-167,70],[-162,58],[-151,56],[-135,60],[-142,70]],
+      [[-81,12],[-72,9],[-64,12],[-52,5],[-46,-1],[-36,-8],[-38,-16],[-45,-23],[-52,-32],[-67,-56],[-74,-51],[-76,-30],[-81,-8]],
+      [[-52,60],[-42,59],[-38,69],[-43,82],[-60,84],[-61,70]],
+      [[-12,36],[0,44],[-10,54],[4,59],[19,70],[33,70],[32,54],[43,47],[30,35],[15,36],[3,37]],
+      [[-17,35],[10,37],[22,33],[32,31],[43,12],[50,11],[43,-12],[33,-29],[19,-35],[11,-34],[9,-16],[-4,2],[-17,14]],
+      [[30,72],[65,76],[108,77],[157,70],[180,62],[180,51],[149,43],[140,35],[128,26],[119,21],[111,10],[106,0],[97,2],[96,18],[80,7],[70,18],[59,24],[50,30],[41,43],[32,50]],
+      [[114,-12],[128,-11],[140,-17],[153,-28],[146,-39],[129,-37],[114,-26]],
+      [[47,-12],[50,-15],[50,-25],[44,-26],[43,-17]],
+      [[98,21],[106,19],[110,11],[117,4],[115,-9],[104,-7],[99,5]],
+      [[130,33],[140,43],[146,44],[144,36],[138,32]],
+      [[-10,51],[-4,58],[2,57],[1,50]],
+      [[165,-34],[178,-40],[178,-47],[166,-46]],
+    ];
+    const insidePolygon = (lon, lat, polygon) => {
+      let inside = false;
+      for (let i=0,j=polygon.length-1;i<polygon.length;j=i++) {
+        const [xi,yi]=polygon[i], [xj,yj]=polygon[j];
+        if ((yi>lat)!==(yj>lat) && lon < ((xj-xi)*(lat-yi)/(yj-yi)+xi)) inside=!inside;
+      }
+      return inside;
+    };
+    const rand = (n) => {const x=Math.sin(n*12.9898+41.34)*43758.5453;return x-Math.floor(x);};
+    const landPoints=[];
+    for(let lat=-75;lat<=78;lat+=3.4){
+      for(let lon=-178;lon<=178;lon+=3.4){
+        const latJ=lat+(rand(lat*13+lon*7)-.5)*1.9;
+        const lonJ=lon+(rand(lon*17-lat*5)-.5)*1.9;
+        if (landPolygons.some(p=>insidePolygon(lonJ,latJ,p))) landPoints.push([latJ,lonJ,rand(lat*43+lon*13)]);
+      }
+    }
+    const coords=[
+      [40.7,-74.0],[51.5,-.1],[25.2,55.3],[1.3,103.8],[-33.8,151.2]
+    ];
+    const rad=Math.PI/180;
+    const xyz=(lat,lon)=>{
+      const a=lat*rad,b=lon*rad;
+      return [Math.cos(a)*Math.sin(b),Math.sin(a),Math.cos(a)*Math.cos(b)];
+    };
+    const projectVector = (v,r=1)=>{
+      const cr=Math.cos(rotation),sr=Math.sin(rotation),ct=Math.cos(tilt),st=Math.sin(tilt);
+      const x=v[0]*cr+v[2]*sr;
+      const z=v[2]*cr-v[0]*sr;
+      const y=v[1]*ct-z*st;
+      const depth=v[1]*st+z*ct;
+      return [x*r,y*r,depth*r];
+    };
+    const project=(lat,lon,r=1)=>projectVector(xyz(lat,lon),r);
+    const interp=(a,b,t)=>{
+      const u=xyz(...a), v=xyz(...b), dot=Math.max(-1,Math.min(1,u[0]*v[0]+u[1]*v[1]+u[2]*v[2]));
+      const theta=Math.acos(dot), sin=Math.sin(theta), w0=sin ? Math.sin((1-t)*theta)/sin:1-t, w1=sin?Math.sin(t*theta)/sin:t;
+      return [u[0]*w0+v[0]*w1,u[1]*w0+v[1]*w1,u[2]*w0+v[2]*w1];
+    };
+    const lineOnGlobe=(points, radius,cx,cy,style,widthLine=1)=>{
+      ctx.beginPath();let drawing=false;
+      points.forEach(([lat,lon])=>{
+        const p=project(lat,lon); if(p[2]>.012){const x=cx+p[0]*radius,y=cy-p[1]*radius;if(!drawing){ctx.moveTo(x,y);drawing=true;}else ctx.lineTo(x,y);}else drawing=false;
+      });
+      ctx.strokeStyle=style;ctx.lineWidth=widthLine;ctx.stroke();
+    };
+    function resize() {
+      const bounds=canvas.getBoundingClientRect();
+      const scale=Math.min(window.devicePixelRatio||1,2);
+      width=Math.max(250,bounds.width); height=Math.max(250,bounds.height);
+      canvas.width=Math.round(width*scale);canvas.height=Math.round(height*scale);
+      ctx.setTransform(scale,0,0,scale,0,0);
+      // A resize clears the canvas; refresh its still frame for reduced-motion visitors.
+      if (reduceMotion) draw(performance.now());
+    }
+    const resizeObserver = 'ResizeObserver' in window ? new ResizeObserver(resize) : null;
+    resizeObserver?.observe(canvas);
+    window.addEventListener('resize',resize,{passive:true}); resize();
+
+    function draw(ms) {
+      const dt=prevTime?Math.min(36,ms-prevTime):16;prevTime=ms;
+      if (!dragging && !reduceMotion) rotation+=dt*.000115;
+      ctx.clearRect(0,0,width,height);
+      const cx=width*.5,cy=height*.505,R=Math.min(width,height)*.337;
+
+      // Suspended ambient rings give the globe dimensional context.
+      ctx.save();ctx.translate(cx,cy);ctx.rotate(-.31);
+      ctx.beginPath();ctx.ellipse(0,0,R*1.48,R*.55,0,0,Math.PI*2);
+      ctx.strokeStyle='rgba(103,193,184,.20)';ctx.lineWidth=1.2;ctx.stroke();
+      ctx.beginPath();ctx.ellipse(0,0,R*1.38,R*.49,0,.18,Math.PI*1.22);
+      ctx.strokeStyle='rgba(116,189,153,.64)';ctx.lineWidth=1.5;ctx.stroke();ctx.restore();
+
+      const haze=ctx.createRadialGradient(cx,cy,R*.6,cx,cy,R*1.42);
+      haze.addColorStop(0,'rgba(163,232,225,0)');haze.addColorStop(.58,'rgba(156,225,218,.16)');haze.addColorStop(1,'rgba(156,225,218,0)');
+      ctx.fillStyle=haze;ctx.beginPath();ctx.arc(cx,cy,R*1.42,0,Math.PI*2);ctx.fill();
+
+      const core=ctx.createRadialGradient(cx-R*.34,cy-R*.44,R*.07,cx+R*.19,cy+R*.21,R*1.35);
+      core.addColorStop(0,'#CBE7E5');core.addColorStop(.35,'#84DBD2');core.addColorStop(.72,'#3AA399');core.addColorStop(1,'#1B7067');
+      ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.fillStyle=core;ctx.fill();
+      ctx.strokeStyle='rgba(219,239,237,.74)';ctx.lineWidth=2.5;ctx.stroke();
+
+      ctx.save();ctx.beginPath();ctx.arc(cx,cy,R-.9,0,Math.PI*2);ctx.clip();
+      // Soft light grazing the lower left side of the sphere.
+      const shading=ctx.createLinearGradient(cx-R,cy-R,cx+R,cy+R);
+      shading.addColorStop(0,'rgba(255,255,255,.25)');shading.addColorStop(.58,'rgba(116,198,190,0)');shading.addColorStop(1,'rgba(57,136,128,.22)');
+      ctx.fillStyle=shading;ctx.fillRect(cx-R,cy-R,R*2,R*2);
+      for (let lat=-75;lat<=75;lat+=15) {
+        const pts=[];for(let lon=-180;lon<=180;lon+=2.5) pts.push([lat,lon]);
+        lineOnGlobe(pts,R,cx,cy,'rgba(229,244,242,.22)',.7);
+      }
+      for (let lon=-180;lon<180;lon+=15) {
+        const pts=[];for(let lat=-90;lat<=90;lat+=2.5) pts.push([lat,lon]);
+        lineOnGlobe(pts,R,cx,cy,'rgba(229,244,242,.20)',.7);
+      }
+      for (const [lat,lon,seed] of landPoints) {
+        const p=project(lat,lon);
+        if(p[2]>.015){
+          const opacity=.20+p[2]*.67;
+          ctx.beginPath();ctx.arc(cx+p[0]*R,cy-p[1]*R,(seed>.83?1.6:1.1)*(width/560)*1.1,0,Math.PI*2);
+          ctx.fillStyle=`rgba(${seed>.89?'109,225,166':'160,239,222'},${seed>.89?'.95':opacity})`;
+          ctx.fill();
+        }
+      }
+      // Highlighted travel pathways. Paths are decorative, not service coverage claims.
+      for(let i=0;i<coords.length-1;i++){
+        const from=coords[i], to=coords[i+1];const total=64;
+        ctx.beginPath();let drawing=false;
+        for(let j=0;j<=total;j++){
+          const t=j/total, lift=1+Math.sin(Math.PI*t)*.105;
+          const p=projectVector(interp(from,to,t),lift);
+          if(p[2]>-.04){const x=cx+p[0]*R,y=cy-p[1]*R;if(drawing)ctx.lineTo(x,y);else{ctx.moveTo(x,y);drawing=true;}}else drawing=false;
+        }
+        ctx.strokeStyle='rgba(100,178,139,.58)';ctx.lineWidth=1.5;ctx.setLineDash([4,5]);ctx.stroke();ctx.setLineDash([]);
+        const active=((ms*.00009)+i*.23)%1;
+        const moving=projectVector(interp(from,to,active),1+Math.sin(Math.PI*active)*.105);
+        if(moving[2]>0){
+          ctx.beginPath();ctx.arc(cx+moving[0]*R,cy-moving[1]*R,2.5,0,Math.PI*2);
+          ctx.shadowBlur=10;ctx.shadowColor='#83D0AA';ctx.fillStyle='#81D4AB';ctx.fill();ctx.shadowBlur=0;
+        }
+      }
+      coords.forEach(([lat,lon])=>{
+        const p=project(lat,lon,1.008);if(p[2]>.04){
+          const x=cx+p[0]*R,y=cy-p[1]*R;
+          ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.strokeStyle='rgba(100,177,138,.4)';ctx.lineWidth=1.2;ctx.stroke();
+          ctx.beginPath();ctx.arc(x,y,2.4,0,Math.PI*2);ctx.fillStyle='#76BC99';ctx.fill();
+        }
+      });
+      ctx.restore();
+
+      // Satellite orbit and tiny floating sparkles.
+      const orb=(ms*.00027)%(Math.PI*2);
+      const ox=cx+Math.cos(orb)*R*1.33,oy=cy+Math.sin(orb)*R*.48;
+      ctx.beginPath();ctx.arc(ox,oy,3.3,0,Math.PI*2);ctx.fillStyle='#76C39C';ctx.shadowBlur=15;ctx.shadowColor='rgba(115,208,162,.6)';ctx.fill();ctx.shadowBlur=0;
+      for (let i=0;i<7;i++){
+        const a=i*2.399+0.3,rr=R*(1.17+(i%3)*.14),sx=cx+Math.cos(a)*rr,sy=cy+Math.sin(a)*rr*.78;
+        ctx.fillStyle=i%3?'rgba(134,201,194,.38)':'rgba(114,190,152,.64)';
+        ctx.beginPath();ctx.arc(sx,sy,(i%3===0?2.1:1.4),0,Math.PI*2);ctx.fill();
+      }
+      if (!reduceMotion && visible) requestAnimationFrame(draw);
+    }
+    canvas.addEventListener('pointerdown',event=>{dragging=true;lastX=event.clientX;lastY=event.clientY;canvas.setPointerCapture(event.pointerId);});
+    canvas.addEventListener('pointermove',event=>{
+      if(!dragging)return;
+      rotation+=(event.clientX-lastX)*.008;
+      tilt=Math.max(-.9,Math.min(.9,tilt+(event.clientY-lastY)*.003));
+      lastX=event.clientX;lastY=event.clientY;
+      if(reduceMotion)draw(performance.now());
+    });
+    for (const eventName of ['pointerup','pointercancel']) canvas.addEventListener(eventName,()=>dragging=false);
+    document.addEventListener('visibilitychange',()=>{
+      visible=!document.hidden;
+      if(visible && !reduceMotion){prevTime=0;requestAnimationFrame(draw);}
+    });
+    // Paint immediately as a useful still frame when motion is reduced,
+    // then animate continuously for visitors who allow motion.
+    draw(performance.now());
+  }
+})();

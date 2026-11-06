@@ -1,0 +1,61 @@
+/*
+ * SENCHI GLOBAL LLC — Full-width Our Process travel background
+ * New photo only affects the #process section. Four original cards and animations are retained.
+ */
+#process.process-section {
+  background-color: #006867 !important;
+  background-image:
+    linear-gradient(180deg, rgba(0, 36, 44, .50) 0%, rgba(0, 42, 49, .43) 36%, rgba(0, 46, 49, .35) 72%, rgba(0, 36, 44, .48) 100%),
+    url('../assets/process-global-travel.webp') !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  color: #FFFFFF !important;
+}
+/* Existing global pseudo-element themes must not obscure the uploaded photograph. */
+#process.process-section::before,
+#process.process-section::after {
+  background: none !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+}
+/* White and mint headings on the photograph; contents of the cards stay teal. */
+#process .section-heading,
+#process .section-heading h2,
+#process .section-heading h2 strong,
+#process .section-heading p,
+#process .section-heading .eyebrow,
+#process .section-heading .eyebrow .icon {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+#process .section-heading h2 em {
+  color: #C4FFDD !important;
+  -webkit-text-fill-color: #C4FFDD !important;
+}
+#process .section-heading {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 12px rgba(0, 30, 33, .24);
+}
+#process .process-grid,
+#process .process-section__note {
+  position: relative;
+  z-index: 1;
+}
+/* The original cards are left white for legibility and look like floating panels. */
+#process .process-card {
+  box-shadow: 0 16px 42px rgba(0, 26, 32, .22), 0 3px 9px rgba(0, 26, 32, .10) !important;
+}
+#process .process-section__note {
+  box-shadow: 0 12px 28px rgba(0, 26, 32, .13);
+}
+@media (max-width: 720px) {
+  #process.process-section {
+    background-position: 66% center !important;
+    background-image:
+      linear-gradient(180deg, rgba(0, 36, 44, .58), rgba(0, 46, 49, .39) 48%, rgba(0, 36, 44, .54)),
+      url('../assets/process-global-travel.webp') !important;
+  }
+}

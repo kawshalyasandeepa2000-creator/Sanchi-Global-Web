@@ -1,0 +1,248 @@
+/* Compact footer office and social bar — SENCHI GLOBAL LLC (Nov 2026) */
+.site-footer .footer-office-social {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(240px, .85fr);
+  gap: 24px;
+  align-items: center;
+  background: #FFFFFF;
+  color: #007474;
+  border: 1px solid rgba(196,255,221,.55);
+  border-radius: 20px;
+  padding: 18px 22px;
+  margin: 0 0 22px;
+  box-shadow: 0 16px 32px rgba(0,30,30,.12);
+}
+.site-footer .footer-office-social__location {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.site-footer .footer-office-social__pin {
+  display: grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: #C4FFDD;
+  color: #007474;
+}
+.site-footer .footer-office-social__details {min-width: 0;}
+.site-footer .footer-office-social__eyebrow,
+.site-footer .footer-office-social__follow-heading {
+  display: block;
+  margin: 0 0 4px;
+  color: #BA6316;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  font-size: 9px;
+  font-weight: 850;
+}
+.site-footer .footer-office-social__details strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 780;
+  color: #007474 !important;
+  line-height: 1.35;
+}
+.site-footer .footer-office-social__details address {
+  font-style: normal;
+  margin-top: 4px;
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: #007474 !important;
+  opacity: .82;
+}
+.site-footer .footer-office-social__map {
+  margin-left: auto;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #007474 !important;
+  font-size: 10.5px;
+  font-weight: 750;
+  text-decoration: none;
+  padding: 9px 11px;
+  border: 1px solid rgba(0,116,116,.22);
+  border-radius: 10px;
+  background: #C4FFDD;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.site-footer .footer-office-social__map:hover {transform: translateY(-2px);box-shadow: 0 4px 14px rgba(0,116,116,.14);color: #007474 !important;}
+.site-footer .footer-office-social__follow {
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+  min-width: 220px;
+}
+.site-footer .footer-office-social__follow-heading {margin-bottom: 3px;}
+.site-footer .branch-social-icons {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.site-footer .branch-social-icon {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  background: #C4FFDD;
+  border: 1px solid rgba(0,116,116,.12);
+  color: #007474 !important;
+  text-decoration: none;
+  transition: background .22s ease, color .22s ease, transform .22s ease;
+}
+.site-footer a.branch-social-icon:hover {background:#007474;color:#FFFFFF !important;transform: translateY(-2px);}
+.site-footer .branch-social-icon--pending {opacity: .57;cursor: default;}
+.site-footer .footer-office-social__follow small {font-size:9px;color:#007474;opacity:.7;line-height:1.3;}
+@media(max-width: 900px) {
+  .site-footer .footer-office-social {grid-template-columns: minmax(0,1fr);gap:17px;}
+  .site-footer .footer-office-social__follow {justify-self: start;min-width: 0;}
+}
+@media(max-width: 520px) {
+  .site-footer .footer-office-social {padding:15px;border-radius:15px;margin-bottom:18px;}
+  .site-footer .footer-office-social__location {align-items:flex-start;gap:10px;flex-wrap:wrap;}
+  .site-footer .footer-office-social__pin {width:34px;height:34px;flex-basis:34px;border-radius:10px;}
+  .site-footer .footer-office-social__details {flex:1 1 calc(100% - 49px);}
+  .site-footer .footer-office-social__map {margin-left:44px;padding:7px 10px;}
+  .site-footer .footer-office-social__details strong {font-size:11px;}
+  .site-footer .footer-office-social__details address {font-size:10px;}
+  .site-footer .branch-social-icon {width:34px;height:34px;}
+}
+@media(prefers-reduced-motion: reduce) {
+  .site-footer :is(.branch-social-icon,.footer-office-social__map) {transition:none;}
+}
+/* Ensure white footer-wide typography rules cannot hide text/icons on this white panel. */
+body .site-footer .footer-office-social .footer-office-social__details strong,
+body .site-footer .footer-office-social .footer-office-social__follow small,
+body .site-footer .footer-office-social .footer-office-social__pin .icon,
+body .site-footer .footer-office-social .footer-office-social__map .icon,
+body .site-footer .footer-office-social .branch-social-icon .icon {
+  color: #007474 !important;
+  -webkit-text-fill-color: #007474 !important;
+  stroke: currentColor !important;
+}
+body .site-footer .footer-office-social a.branch-social-icon:hover .icon {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* Nov 5, 2026 — Exact SENCHI GLOBAL teal social icon treatment.
+   Keep placeholder icons fully visible while their links are unconfigured. */
+body .site-footer .branch-social-icon--pending {
+  opacity: 1 !important;
+}
+body .site-footer .branch-social-icon,
+body .site-footer .branch-social-icon .icon,
+body .site-footer .branch-social-icon svg {
+  color: #007474 !important;
+  -webkit-text-fill-color: #007474 !important;
+}
+body .site-footer a.branch-social-icon:hover,
+body .site-footer a.branch-social-icon:hover .icon,
+body .site-footer a.branch-social-icon:hover svg {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+
+/* Nov 5, 2026 — Real social brand logos inside animated glass buttons */
+.site-footer .branch-social-icons {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.site-footer .branch-social-icon {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.4));
+  border: 1px solid rgba(255,255,255,.68);
+  box-shadow: 0 10px 24px rgba(0, 78, 78, .14), inset 0 1px 0 rgba(255,255,255,.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transform: translateY(0);
+  animation: senchiGlassFloat 3.2s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease, background .28s ease;
+}
+.site-footer .branch-social-icon::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, rgba(255,255,255,.6), rgba(255,255,255,.08));
+  z-index: -1;
+}
+.site-footer .branch-social-icon::after {
+  content: '';
+  position: absolute;
+  top: -35%;
+  left: -65%;
+  width: 60%;
+  height: 170%;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0));
+  transform: rotate(20deg);
+  transition: left .45s ease;
+}
+.site-footer a.branch-social-icon:hover {
+  background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.55));
+  border-color: rgba(255,255,255,.9);
+  box-shadow: 0 16px 28px rgba(0, 78, 78, .22), inset 0 1px 0 rgba(255,255,255,.86);
+  transform: translateY(-4px) scale(1.03);
+}
+.site-footer a.branch-social-icon:hover::after {
+  left: 120%;
+}
+.site-footer .social-brand-wrap {
+  display:grid;
+  place-items:center;
+  width: 24px;
+  height: 24px;
+}
+.site-footer .social-brand-logo {
+  width: 24px;
+  height: 24px;
+  display:block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.08));
+}
+.site-footer .branch-social-icon--facebook .social-brand-logo,
+.site-footer .branch-social-icon--whatsapp .social-brand-logo {
+  width: 23px;
+  height: 23px;
+}
+.site-footer .sr-only {
+  position:absolute !important;
+  width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+@keyframes senchiGlassFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@media (max-width: 520px) {
+  .site-footer .branch-social-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+  }
+  .site-footer .social-brand-logo {
+    width: 22px;
+    height: 22px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-footer .branch-social-icon {
+    animation: none;
+  }
+  .site-footer .branch-social-icon::after {
+    transition: none;
+  }
+}

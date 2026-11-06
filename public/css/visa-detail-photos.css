@@ -1,0 +1,119 @@
+/* SENCHI GLOBAL LLC — Visa detail page photography.
+   Only affects the three dedicated visa detail page hero sections.
+   Keeps text content separate from the photography and leaves the homepage untouched. */
+
+.detail-hero .detail-hero__grid {
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+  gap: clamp(28px, 4.5vw, 78px);
+}
+
+.detail-hero__art--photo {
+  position: relative;
+  width: 100%;
+  height: clamp(390px, 37vw, 490px);
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+
+/* Soft ambient light behind the actual photograph */
+.detail-hero__art--photo::before {
+  content: "";
+  position: absolute;
+  inset: 11% -7%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(75,184,120,.27), rgba(90,183,177,.12) 47%, transparent 72%);
+  filter: blur(17px);
+  pointer-events: none;
+}
+
+.detail-hero__photo-frame {
+  position: relative;
+  overflow: hidden;
+  width: min(100%, 475px);
+  height: 100%;
+  border: 1px solid rgba(160,245,218,.55);
+  border-radius: 32px;
+  background: #08332e;
+  box-shadow: 0 32px 75px rgba(0,16,14,.38), 0 9px 24px rgba(0,0,0,.20), inset 0 1px rgba(255,255,255,.28);
+  transform: translateZ(0);
+}
+
+.detail-hero__photo-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,18,16,.03) 0%, transparent 54%, rgba(0,29,25,.26) 100%);
+}
+
+.detail-hero__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center center;
+  transition: transform .65s cubic-bezier(.2,.7,.2,1);
+}
+
+.detail-hero--tourist .detail-hero__photo { object-position: center 55%; }
+.detail-hero--student .detail-hero__photo { object-position: center 48%; }
+.detail-hero--work .detail-hero__photo { object-position: center 55%; }
+
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .detail-hero__photo-frame:hover .detail-hero__photo { transform: scale(1.035); }
+}
+
+/* Keep the existing trust label legible over the photo edge */
+.detail-hero__art--photo .detail-hero__badge {
+  position: absolute;
+  right: -9px;
+  bottom: 14px;
+  z-index: 2;
+  background: rgba(6,48,43,.96);
+  border: 1px solid rgba(185,246,220,.30);
+  color: #ecfff5;
+  box-shadow: 0 10px 26px rgba(0,0,0,.23);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@media (max-width: 900px) {
+  .detail-hero .detail-hero__grid { gap: 24px; }
+  .detail-hero__art--photo { height: 365px; }
+  .detail-hero__photo-frame { border-radius: 24px; }
+}
+
+@media (max-width: 720px) {
+  .detail-hero .detail-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+  .detail-hero__art--photo {
+    width: 100%;
+    height: clamp(295px, 92vw, 420px);
+    max-width: 510px;
+    margin-inline: auto;
+  }
+  .detail-hero__photo-frame {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+  }
+  .detail-hero__art--photo .detail-hero__badge {
+    right: 8px;
+    bottom: 10px;
+    max-width: calc(100% - 16px);
+    padding: 10px 12px;
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-hero__photo { transition: none; }
+}

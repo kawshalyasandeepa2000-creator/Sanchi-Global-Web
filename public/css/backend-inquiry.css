@@ -1,0 +1,5 @@
+/* Live inquiry backend: unobtrusive additions, preserving the existing brand design. */
+.inquiry-honeypot { position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important; opacity: 0 !important; overflow: hidden !important; pointer-events: none !important; }
+.inquiry-feedback { padding: 12px 14px; margin-top: 10px; border: 1px solid #BA6316; border-radius: 10px; background: #FFFFFF; color: #7A3D0B !important; font-size: 13px; line-height: 1.5; }
+#inquiry-form button[type="submit"]:disabled { opacity: 0.65; cursor: wait; }
+.inquiry-result[hidden], .inquiry-feedback[hidden], #inquiry-preview[hidden], #copy-inquiry[hidden] { display: none !important; }
